@@ -29,7 +29,6 @@
 		695560F3210A691D00CFFD7A /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695560F2210A691D00CFFD7A /* UserController.swift */; };
 		695F91AE211104AE00FE1693 /* EditProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F91AD211104AE00FE1693 /* EditProductTableViewCell.swift */; };
 		6974777E210D01C7004189AC /* CoffeeBean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974777D210D01C7004189AC /* CoffeeBean.swift */; };
-		69747788210D205F004189AC /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69747787210D205F004189AC /* MockData.swift */; };
 		6981C1F9211029CF0013A42E /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981C1F8211029CF0013A42E /* ContentTableViewCell.swift */; };
 		69834F17211181CE00563AD0 /* RoasterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69834F16211181CE00563AD0 /* RoasterTableViewCell.swift */; };
 		698E564C210BE0A600BA0883 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698E564B210BE0A600BA0883 /* Icons.xcassets */; };
@@ -71,6 +70,12 @@
 		F736664D21F812BF00685C25 /* PhotoSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F736664C21F812BF00685C25 /* PhotoSelector.storyboard */; };
 		F7434260216F92FB00024AA7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F743425F216F92FB00024AA7 /* GoogleService-Info.plist */; };
 		F748C20B218F9EDC006838B7 /* PostCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F748C209218F9EDC006838B7 /* PostCollectionReusableView.swift */; };
+		F757A4E121FEA6AC00A9CFAD /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E021FEA6AC00A9CFAD /* UIImageViewExtension.swift */; };
+		F757A4E321FEC05900A9CFAD /* PhotoPager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F757A4E221FEC05900A9CFAD /* PhotoPager.storyboard */; };
+		F757A4E521FEC27D00A9CFAD /* PhotoPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E421FEC27D00A9CFAD /* PhotoPagerViewController.swift */; };
+		F757A4E721FECCFD00A9CFAD /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E621FECCFD00A9CFAD /* PhotoViewController.swift */; };
+		F757A4E921FF737A00A9CFAD /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E821FF737A00A9CFAD /* UIImageExtension.swift */; };
+		F757A4EB21FFBDA000A9CFAD /* ThumbNailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4EA21FFBDA000A9CFAD /* ThumbNailImageView.swift */; };
 		F75E0FFF2170080600534B9C /* FirestoreFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E0FFE2170080600534B9C /* FirestoreFetchable.swift */; };
 		F75E100121702D3F00534B9C /* FirestorePhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E100021702D3F00534B9C /* FirestorePhotos.swift */; };
 		F75E100321702D8000534B9C /* FirestoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E100221702D8000534B9C /* FirestoreClient.swift */; };
@@ -101,6 +106,11 @@
 		F79B07F621641C4F004B8748 /* DataCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B07F521641C4F004B8748 /* DataCells.swift */; };
 		F79B07FE21642E21004B8748 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B07FD21642E21004B8748 /* StringExtension.swift */; };
 		F7CD697E2188DC31006C91C2 /* ShopAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CD697D2188DC31006C91C2 /* ShopAnnotation.swift */; };
+		F7D4C57721F8F26C002C6646 /* RoastType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D4C57621F8F26C002C6646 /* RoastType.swift */; };
+		F7D4C57921F8F291002C6646 /* PhotoDescribableEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D4C57821F8F291002C6646 /* PhotoDescribableEnum.swift */; };
+		F7D4C57B21F8F3B2002C6646 /* ProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D4C57A21F8F3B2002C6646 /* ProductType.swift */; };
+		F7D4C57E21F95392002C6646 /* IconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D4C57D21F95392002C6646 /* IconCollectionViewCell.swift */; };
+		F7D4C58021F955C3002C6646 /* IconCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D4C57F21F955C3002C6646 /* IconCollectionViewCell.xib */; };
 		F7D7BF9D217A93DA00B02920 /* Avenir Next.ttc in Resources */ = {isa = PBXBuildFile; fileRef = F7D7BF9A217A936700B02920 /* Avenir Next.ttc */; };
 		F7D7BF9E217A93DA00B02920 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = F7D7BF98217A936700B02920 /* Avenir.ttc */; };
 		F7D7BF9F217A93DA00B02920 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7D7BF99217A936700B02920 /* Lato-Bold.ttf */; };
@@ -136,7 +146,6 @@
 		695560F2210A691D00CFFD7A /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		695F91AD211104AE00FE1693 /* EditProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductTableViewCell.swift; sourceTree = "<group>"; };
 		6974777D210D01C7004189AC /* CoffeeBean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeBean.swift; sourceTree = "<group>"; };
-		69747787210D205F004189AC /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		6981C1F8211029CF0013A42E /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
 		69834F16211181CE00563AD0 /* RoasterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoasterTableViewCell.swift; sourceTree = "<group>"; };
 		698E564B210BE0A600BA0883 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -181,6 +190,12 @@
 		F736664C21F812BF00685C25 /* PhotoSelector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoSelector.storyboard; sourceTree = "<group>"; };
 		F743425F216F92FB00024AA7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F748C209218F9EDC006838B7 /* PostCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionReusableView.swift; sourceTree = "<group>"; };
+		F757A4E021FEA6AC00A9CFAD /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		F757A4E221FEC05900A9CFAD /* PhotoPager.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoPager.storyboard; sourceTree = "<group>"; };
+		F757A4E421FEC27D00A9CFAD /* PhotoPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPagerViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		F757A4E621FECCFD00A9CFAD /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		F757A4E821FF737A00A9CFAD /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		F757A4EA21FFBDA000A9CFAD /* ThumbNailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbNailImageView.swift; sourceTree = "<group>"; };
 		F75E0FFE2170080600534B9C /* FirestoreFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreFetchable.swift; sourceTree = "<group>"; };
 		F75E100021702D3F00534B9C /* FirestorePhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePhotos.swift; sourceTree = "<group>"; };
 		F75E100221702D8000534B9C /* FirestoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreClient.swift; sourceTree = "<group>"; };
@@ -211,6 +226,11 @@
 		F79B07F521641C4F004B8748 /* DataCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCells.swift; sourceTree = "<group>"; };
 		F79B07FD21642E21004B8748 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		F7CD697D2188DC31006C91C2 /* ShopAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAnnotation.swift; sourceTree = "<group>"; };
+		F7D4C57621F8F26C002C6646 /* RoastType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoastType.swift; sourceTree = "<group>"; };
+		F7D4C57821F8F291002C6646 /* PhotoDescribableEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDescribableEnum.swift; sourceTree = "<group>"; };
+		F7D4C57A21F8F3B2002C6646 /* ProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductType.swift; sourceTree = "<group>"; };
+		F7D4C57D21F95392002C6646 /* IconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCollectionViewCell.swift; sourceTree = "<group>"; };
+		F7D4C57F21F955C3002C6646 /* IconCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCollectionViewCell.xib; sourceTree = "<group>"; };
 		F7D7BF92217A935300B02920 /* SpiltCoffee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpiltCoffee.entitlements; sourceTree = "<group>"; };
 		F7D7BF95217A936600B02920 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		F7D7BF96217A936600B02920 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
@@ -285,6 +305,9 @@
 				F72CC7E72174EE2A0031CF1C /* ConstantData.swift */,
 				F77B538D21865B2800EF04E1 /* CustomEnum.swift */,
 				F7CD697D2188DC31006C91C2 /* ShopAnnotation.swift */,
+				F7D4C57621F8F26C002C6646 /* RoastType.swift */,
+				F7D4C57821F8F291002C6646 /* PhotoDescribableEnum.swift */,
+				F7D4C57A21F8F3B2002C6646 /* ProductType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -314,7 +337,6 @@
 			children = (
 				F79AB9CB219622A000F5856C /* Videos */,
 				27D7EAFC5AAE78142EA5A77E /* AppDelegate.swift */,
-				69747787210D205F004189AC /* MockData.swift */,
 				91C2C12479FD7D11EB3778D5 /* Extensions */,
 				681242C7F1CCCC311F86BEE8 /* Graphics */,
 				27D4475B21C632613F39B222 /* Interface */,
@@ -330,6 +352,8 @@
 				F79B07FD21642E21004B8748 /* StringExtension.swift */,
 				F72A0A452167A9DA006F383A /* UIViewController+Extension.swift */,
 				F717738A216A64D70004693E /* UIViewExtension.swift */,
+				F757A4E021FEA6AC00A9CFAD /* UIImageViewExtension.swift */,
+				F757A4E821FF737A00A9CFAD /* UIImageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,6 +389,7 @@
 			children = (
 				F72E91A92177DAF200D13300 /* ProfileImageView.swift */,
 				F72E91AC2177DDC700D13300 /* RoundedDropShadowView.swift */,
+				F757A4EA21FFBDA000A9CFAD /* ThumbNailImageView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -393,6 +418,7 @@
 				F717738C216A66E80004693E /* UserSettings.storyboard */,
 				F75FDC08217785F80048060D /* Recepie.storyboard */,
 				F736664C21F812BF00685C25 /* PhotoSelector.storyboard */,
+				F757A4E221FEC05900A9CFAD /* PhotoPager.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -408,6 +434,7 @@
 				F796D0AE21656AD4008A97EF /* UserProfileHeaderView.xib */,
 				F72A0A3F2167A083006F383A /* PhotoCell.xib */,
 				F72CC7DF2174E8440031CF1C /* DesignCell.xib */,
+				F7D4C57F21F955C3002C6646 /* IconCollectionViewCell.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -430,6 +457,7 @@
 				F72CC7E12174E9A50031CF1C /* DesignTableViewCell.swift */,
 				F748C209218F9EDC006838B7 /* PostCollectionReusableView.swift */,
 				F70B9AFF2194238300895D52 /* RecepieVideoView.swift */,
+				F7D4C57D21F95392002C6646 /* IconCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -460,6 +488,8 @@
 				F7673ADF217E69CF00C1BB3F /* WelcomeViewController.swift */,
 				F7DE77D121825A5D00817CD9 /* LaunchCopyViewController.swift */,
 				F77B539121869B6D00EF04E1 /* AddShopViewController.swift */,
+				F757A4E421FEC27D00A9CFAD /* PhotoPagerViewController.swift */,
+				F757A4E621FECCFD00A9CFAD /* PhotoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -574,10 +604,12 @@
 				F75FDC09217785F80048060D /* Recepie.storyboard in Resources */,
 				F7D7BFA2217A93DA00B02920 /* Lato-LightItalic.ttf in Resources */,
 				F79B07E92163E506004B8748 /* CoffeeBeanCell.xib in Resources */,
+				F7D4C58021F955C3002C6646 /* IconCollectionViewCell.xib in Resources */,
 				F7D7BF9F217A93DA00B02920 /* Lato-Bold.ttf in Resources */,
 				69306A5021122B3100C81D37 /* RoasterProfile.storyboard in Resources */,
 				F7D7BFA3217A93DA00B02920 /* Lato-Regular.ttf in Resources */,
 				698E564C210BE0A600BA0883 /* Icons.xcassets in Resources */,
+				F757A4E321FEC05900A9CFAD /* PhotoPager.storyboard in Resources */,
 				F7673ADE217E657D00C1BB3F /* Welcome.storyboard in Resources */,
 				69306A5221122B9300C81D37 /* Shop.storyboard in Resources */,
 				F79B07DD2163CCA5004B8748 /* RoasterCell.xib in Resources */,
@@ -663,6 +695,7 @@
 				F72CC7E42174EB230031CF1C /* DesignCellData.swift in Sources */,
 				695560E4210A432F00CFFD7A /* Enthusiast.swift in Sources */,
 				F72CC7E22174E9A50031CF1C /* DesignTableViewCell.swift in Sources */,
+				F7D4C57921F8F291002C6646 /* PhotoDescribableEnum.swift in Sources */,
 				F77B538E21865B2800EF04E1 /* CustomEnum.swift in Sources */,
 				F735159C21665A52005DA280 /* ProductsTableViewController.swift in Sources */,
 				F79B07F021640A93004B8748 /* DataType.swift in Sources */,
@@ -675,12 +708,15 @@
 				F72A0A462167A9DA006F383A /* UIViewController+Extension.swift in Sources */,
 				F72E91AA2177DAF200D13300 /* ProfileImageView.swift in Sources */,
 				F7CD697E2188DC31006C91C2 /* ShopAnnotation.swift in Sources */,
+				F757A4EB21FFBDA000A9CFAD /* ThumbNailImageView.swift in Sources */,
 				F7177393216A6B0D0004693E /* EditProfileTableViewController.swift in Sources */,
 				F72CC7E62174ED510031CF1C /* ProductCategoriesTableViewController.swift in Sources */,
+				F7D4C57E21F95392002C6646 /* IconCollectionViewCell.swift in Sources */,
 				6981C1F9211029CF0013A42E /* ContentTableViewCell.swift in Sources */,
 				F72A0A3C216799B3006F383A /* PostController.swift in Sources */,
 				69BCEEB821090A7100F2D88E /* StyleGuide.swift in Sources */,
 				F7DE77D221825A5D00817CD9 /* LaunchCopyViewController.swift in Sources */,
+				F757A4E721FECCFD00A9CFAD /* PhotoViewController.swift in Sources */,
 				F79B07FE21642E21004B8748 /* StringExtension.swift in Sources */,
 				F717738B216A64D70004693E /* UIViewExtension.swift in Sources */,
 				9CCBC069932383367B95213B /* AppDelegate.swift in Sources */,
@@ -694,25 +730,29 @@
 				F79B07F621641C4F004B8748 /* DataCells.swift in Sources */,
 				6974777E210D01C7004189AC /* CoffeeBean.swift in Sources */,
 				F79B07F421640E45004B8748 /* DataView.swift in Sources */,
+				F757A4E521FEC27D00A9CFAD /* PhotoPagerViewController.swift in Sources */,
 				F75E100321702D8000534B9C /* FirestoreClient.swift in Sources */,
 				F72A0A422167A0BE006F383A /* PhotoCollectionViewCell.swift in Sources */,
 				F75E0FFF2170080600534B9C /* FirestoreFetchable.swift in Sources */,
 				69BBB4A521117896009DE758 /* OriginTableViewCell.swift in Sources */,
 				695560F3210A691D00CFFD7A /* UserController.swift in Sources */,
+				F757A4E121FEA6AC00A9CFAD /* UIImageViewExtension.swift in Sources */,
 				695560EC210A48E000CFFD7A /* Recepie.swift in Sources */,
 				F75E100121702D3F00534B9C /* FirestorePhotos.swift in Sources */,
 				69306A5E2112560200C81D37 /* HomeViewController.swift in Sources */,
 				69306A5921124A2600C81D37 /* DateHelper.swift in Sources */,
+				F7D4C57721F8F26C002C6646 /* RoastType.swift in Sources */,
 				F796D0AD21656A85008A97EF /* UserProfileHeaderView.swift in Sources */,
 				694A7BB6210FD57400B7C3E7 /* PostCollectionViewCell.swift in Sources */,
 				5205BBFF3209AC18D8487395 /* RecepieCollectionViewCell.swift in Sources */,
 				F72CC7E82174EE2A0031CF1C /* ConstantData.swift in Sources */,
 				F72CC7DE2174E6830031CF1C /* SpiltTabBarController.swift in Sources */,
+				F757A4E921FF737A00A9CFAD /* UIImageExtension.swift in Sources */,
 				F748C20B218F9EDC006838B7 /* PostCollectionReusableView.swift in Sources */,
 				69BBB4A221117170009DE758 /* Origin.swift in Sources */,
 				AB3B9A298F127B7D6AFFA614 /* RoasterCollectionViewCell.swift in Sources */,
+				F7D4C57B21F8F3B2002C6646 /* ProductType.swift in Sources */,
 				695560E6210A434000CFFD7A /* Roaster.swift in Sources */,
-				69747788210D205F004189AC /* MockData.swift in Sources */,
 				69834F17211181CE00563AD0 /* RoasterTableViewCell.swift in Sources */,
 				695560EE210A4A5F00CFFD7A /* Product.swift in Sources */,
 				4518E17F5BF2E382851510D9 /* RoasterProfileViewController.swift in Sources */,

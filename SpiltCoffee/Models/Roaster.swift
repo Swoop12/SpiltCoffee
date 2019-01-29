@@ -20,14 +20,10 @@ class Roaster: Enthusiast, AbridgedDictionary{
     var isFeatured: Bool = false
     var location: String?
     
-    var abridgedDictionary: [String : Any]{
+    var abridgedDictionary: [String : String]{
         return [
             "uuid" : uuid,
             "name" : name
-//            "postCount" : postCount,
-//            "productCount" : productCount,
-//            "followerCount" : followerCount,
-//            "followingCount" : followingCount,
         ]
     }
     

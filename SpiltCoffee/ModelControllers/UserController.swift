@@ -30,7 +30,6 @@ class UserController: NSObject {
         if let profilePicture = profilePicture{
             data = UIImageJPEGRepresentation(profilePicture, 0.3)
         }
-        
         let newUser = Enthusiast(name: name, email: email, profilePictureData: data, uuid: uuid)
         FirestoreClient.shared.saveToFirestore(newUser, completion: completion)
         saveProfilePictureForUser(newUser) { (success) in

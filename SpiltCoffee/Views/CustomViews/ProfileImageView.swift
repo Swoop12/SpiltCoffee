@@ -8,43 +8,34 @@
 
 import UIKit
 
-class RoundedImageView: UIImageView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        stylize()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        stylize()
-    }
-    
-    func stylize(){
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 10
-    }
+class RoundedImageView: ThumbNailImageView {
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    stylize()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    stylize()
+  }
+  
+  func stylize(){
+    self.layer.masksToBounds = true
+    self.layer.cornerRadius = 10
+  }
 }
 
-class CircularImageView: UIImageView{
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        stylize()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        stylize()
-    }
-
-    override func didMoveToSuperview() {
-        stylize()
-    }
-    
-    func stylize(){
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = self.bounds.width/2
-    }
-    
+class CircularImageView: ThumbNailImageView{
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    stylize()
+  }
+  
+  func stylize(){
+    self.layer.masksToBounds = true
+    self.layer.cornerRadius = self.bounds.width/2
+  }
+  
 }

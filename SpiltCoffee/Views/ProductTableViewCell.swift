@@ -16,7 +16,7 @@ protocol ProductTableViewCellDelegate: class{
 class ProductTableViewCell: DataTableViewCell<Product> {
   
   //MARK: - IBOutlets
-  @IBOutlet weak var productImageView: UIImageView!
+  @IBOutlet weak var productImageView: RoundedImageView!
   @IBOutlet weak var productNameLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
   
@@ -26,20 +26,10 @@ class ProductTableViewCell: DataTableViewCell<Product> {
   //MARK: - Methods
   override func updateViews(){
     if let product = data{
-      fetchFirstImage(for: product)
+      productImageView.urlString = product.photoUrlStrings.first
     }
     productNameLabel.text = data?.name
     priceLabel.text = "$\(data?.price ?? 0)"
-  }
-  
-  func fetchFirstImage(for product: Product){
-    FirestoreClient.shared.fetchFirstPhotosFor(product) { (success) in
-      if success{
-        DispatchQueue.main.async {
-          self.productImageView.image = product.photos.first
-        }
-      }
-    }
   }
   
   override func prepareForReuse() {

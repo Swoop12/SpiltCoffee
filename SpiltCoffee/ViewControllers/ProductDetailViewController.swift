@@ -12,23 +12,25 @@ class ProductDetailViewController: UIViewController{
   
   //MARK: - IBOUTLETS
   @IBOutlet weak var purchaseButton: UIButton!
-  @IBOutlet weak var nameTextField: UITextField!
+  @IBOutlet weak var nameTextField: UITextView!
   @IBOutlet weak var descriptionTextView: UITextView!
   @IBOutlet weak var priceTextField: UITextField!
-  @IBOutlet weak var photosCollectionView: UICollectionView!
   @IBOutlet weak var originStackView: UIStackView!
   @IBOutlet weak var originTextField: UITextField!
-  @IBOutlet weak var productTypeTextField: UITextField!
-  @IBOutlet weak var roastTextField: UITextField!
   @IBOutlet weak var roastStackView: UIStackView!
   @IBOutlet weak var heartButton: UIButton!
-  @IBOutlet weak var addPhotoButton: UIButton!
   @IBOutlet weak var priceStackView: UIStackView!
   @IBOutlet var pickerView: UIPickerView!
+  @IBOutlet weak var productTypeCollectionView: UICollectionView!
+  @IBOutlet weak var roastTypeCollectionView: UICollectionView!
+  @IBOutlet weak var addPhotosButton: UIButton!
   
   //MARK: - Properties
+  var photoPagerViewController: PhotoPagerViewController?
   var photoCollectionViewDataSource: DataViewGenericDataSource<UIImage>!
   var pickerViewData: [String]?
+  var productType: ProductType?
+  var roastType: RoastType?
   
   //MARK: - ComputedProperties
   var isFavorite: Bool{
@@ -45,101 +47,116 @@ class ProductDetailViewController: UIViewController{
   
   var photos: [UIImage] = []{
     didSet{
-      photoCollectionViewDataSource.sourceOfTruth = photos
-      photosCollectionView.reloadData()
+      photoPagerViewController?.photos = photos
     }
   }
   
   //MARK: - View LifeCycle Methods
   override func viewDidLoad() {
     super.viewDidLoad()
+    productTypeCollectionView.register(UINib(nibName: "IconCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "iconPhotoCell")
+    roastTypeCollectionView.register(UINib(nibName: "IconCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "iconPhotoCell")
     setDelegates()
     setDataSources()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    selectRoastTypeIcons()
+    selectProductTypeIcons()
   }
   
   //MARK: - Functions
   func setDelegates(){
     priceTextField.delegate = self
-    productTypeTextField.delegate = self
     originTextField.delegate = self
-    roastTextField.delegate = self
     descriptionTextView.delegate = self
     pickerView.delegate = self
+    productTypeCollectionView.delegate = self
+    roastTypeCollectionView.delegate = self
   }
   
   func setDataSources(){
     pickerView.dataSource = self
-    photoCollectionViewDataSource = DataViewGenericDataSource(dataView: photosCollectionView, dataType: .photo, data: self.photos)
+    productTypeCollectionView.dataSource = self
+    roastTypeCollectionView.dataSource = self
+//    photoCollectionViewDataSource = DataViewGenericDataSource(dataView: photosCollectionView, dataType: .photo, data: self.photos)
   }
   
   func updateViews(){
-    lockPermissionGuards()
     if let product = product {
       nameTextField.text = product.name
-      self.productTypeTextField.text = product.productType.rawValue
       descriptionTextView.text = product.description
-      purchaseButton.isHidden = false
       priceTextField.text = "\(product.price)"
       purchaseButton.setTitle("$\(product.price)", for: .normal)
       self.photos = product.photos
-      
       if let bean = product as? CoffeeBean{
-        customizeViewFor(coffeeBean: true, bean: bean)
-      }else {
-        customizeViewFor(coffeeBean: false, bean: nil)
+        customizeView(for: bean)
       }
-    }else {
-      purchaseButton.isHidden = true
-      heartButton.isHidden = true
-      priceTextField.text = "\(product?.price ?? 00.00)"
-      priceTextField.isHidden = false
+    }
+    lockPermissionGuards()
+  }
+  
+  func customizeView(for bean: CoffeeBean?){
+    UIView.animate(withDuration: 0.3) {
+      self.originStackView.isHidden = false
+      self.roastTypeCollectionView.isHidden = false
+      self.roastStackView.isHidden = false
+      if let bean = bean{
+        self.heartButton.isHidden = false
+        let heartImage = self.isFavorite ? #imageLiteral(resourceName: "HeartIcon") : #imageLiteral(resourceName: "HollowHeartIcon")
+        self.heartButton.setImage(heartImage, for: .normal)
+        self.originTextField.text = bean.origin?.name ?? "?"
+      }
     }
   }
   
-  func customizeViewFor(coffeeBean: Bool, bean: CoffeeBean?){
-    switch coffeeBean{
-    case true:
-      originStackView.isHidden = false
-      roastStackView.isHidden = false
-      heartButton.isHidden = false
-      
-      let heartImage = isFavorite ? #imageLiteral(resourceName: "HeartIcon") : #imageLiteral(resourceName: "HollowHeartIcon")
-      heartButton.setImage(heartImage, for: .normal)
-      originTextField.text = bean?.origin?.name ?? "?"
-      roastTextField.text = bean?.roastType.rawValue
-      
-    case false:
-      originStackView.isHidden = true
-      roastStackView.isHidden = true
-      heartButton.isHidden = true
+  func hideCoffeeBeanAttributes(){
+    UIView.animate(withDuration: 0.3) {
+      self.originStackView.isHidden = true
+      self.roastTypeCollectionView.isHidden = true
+      self.roastStackView.isHidden = true
+      self.heartButton.isHidden = true
     }
+  }
+  
+  fileprivate func setViewForEditing() {
+    view.allowTextEditting()
+    priceStackView.isHidden = false
+    purchaseButton.isHidden = true
+    heartButton.isHidden = true
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveProduct))
+    self.title = product != nil ? "Edit Product" : "Add Product"
+  }
+  
+  fileprivate func setViewForReading() {
+    view.lockTextEditing()
+    heartButton.isHidden = false
+    purchaseButton.isHidden = false
+    priceStackView.isHidden = true
+    self.navigationItem.rightBarButtonItem = nil
   }
   
   func lockPermissionGuards(){
     if UserController.shared.currentUser?.uuid == product?.roasterAbridgedDictionary?["uuid"] as? String || product == nil{
-      nameTextField.isHidden = false
-      descriptionTextView.isEditable = true
-      productTypeTextField.isUserInteractionEnabled = true
-      originTextField.isUserInteractionEnabled = true
-      roastTextField.isUserInteractionEnabled = true
-      priceStackView.isHidden = false
-      priceTextField.isUserInteractionEnabled = true
-      heartButton.isHidden = true
-      self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveProduct))
-      self.title = product != nil ? "Edit Product" : "Add Product"
-      addPhotoButton.isHidden = false
+      setViewForEditing()
     }else{
-      nameTextField.isHidden = true
-      descriptionTextView.isEditable = false
-      heartButton.isHidden = false
-      productTypeTextField.isUserInteractionEnabled = false
-      originTextField.isUserInteractionEnabled = false
-      roastTextField.isUserInteractionEnabled = false
-      priceTextField.isUserInteractionEnabled = false
-      self.title = product?.name
-      self.navigationItem.rightBarButtonItem = nil
-      addPhotoButton.isHidden = true
+      setViewForReading()
     }
+  }
+  
+  func selectProductTypeIcons(){
+    guard let product = product,
+      let row = ProductType.allCases.index(of: product.productType) else { return }
+    let indexPath = IndexPath(row: row, section: 0)
+    setSelectedItem(for: productTypeCollectionView, at: indexPath)
+  }
+  
+  func selectRoastTypeIcons(){
+    guard let beans = product as? CoffeeBean,
+      let row = RoastType.allCases.index(of: beans.roastType) else { return }
+    let indexPath = IndexPath(row: row, section: 0)
+    setSelectedItem(for: roastTypeCollectionView, at: indexPath)
   }
   
   func saveProduct(){
@@ -147,35 +164,34 @@ class ProductDetailViewController: UIViewController{
       let description = descriptionTextView.text, !description.isEmpty,
       let priceText = priceTextField.text, !priceText.isEmpty, let price = Double(priceText),
       let roaster = UserController.shared.currentUser as? Roaster,
-      let productTypeText = productTypeTextField.text, let productType = ProductType(rawValue: productTypeText) else {
+      let productType = productType else {
         self.presentSimpleAlertWith(title: "Whoops looks like we're missing some info", body: "Please make sure you have filled in all the necessary fields")
         return
     }
-    var roast: RoastType?
     var origin: Origin?
-    if let roastString = roastTextField.text, !roastString.isEmpty{
-      roast = RoastType(rawValue: roastString)
-    }
     if let originString = originTextField.text, !originString.isEmpty{
       origin = Origin(name: originString)
     }
-    if let product = product{
+    if let bean = product as? CoffeeBean{
+      guard let roastType = roastType else {
+        self.presentSimpleAlertWith(title: "Please select a roast type for this bean", body: nil)
+        return
+      }
+      ProductController.shared.update(bean: bean, name: name, price: price, description: description, photos: photos, roastType: roastType, origin: origin, completion: nil)
+    }else if let product = product{
       ProductController.shared.update(product: product, name: name, price: price, description: description, photos: photos, productType: productType, completion: nil)
-    }else if let bean = product as? CoffeeBean{
-      bean.origin = origin
-      bean.roastType = roast ?? .medium
-      ProductController.shared.update(bean: bean, name: name, price: price, description: description, photos: photos, roastType: roast ?? .medium, origin: origin, completion: nil)
     }else{
       ProductController.shared.createProduct(name: name, price: price, description: description, photos: photos, roaster: roaster, productType: productType, completion: nil)
     }
     self.navigationController?.popViewController(animated: true)
   }
   
-  //MARK: - IBActions
-  @IBAction func addPhotoButtonTapped(_ sender: Any) {
-    self.presentImagePickerWith(alertTitle: "Select Images of Your Product", message: nil)
+  //MARK: - Navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    self.photoPagerViewController = segue.destination as? PhotoPagerViewController
   }
   
+  //MARK: - IBActions
   @IBAction func favoriteButtonTapped(_ sender: UIButton) {
     guard let bean = product as? CoffeeBean else { return }
     if isFavorite{
@@ -191,6 +207,9 @@ class ProductDetailViewController: UIViewController{
     self.presentSimpleAlertWith(title: "Visit \(self.product?.roaster?.name ?? "the Roasters") Website to Purchase", body: "In app purchases coming soon (:")
   }
   
+  @IBAction func addPhotoButtonTapped(_ sender: Any) {
+    self.presentImagePickerWith(alertTitle: "Add an image", message: nil)
+  }
 }
 
 //MARK: - UIPickerView DataSource & Delegate
@@ -238,10 +257,6 @@ extension ProductDetailViewController: UIPickerViewDelegate, UIPickerViewDataSou
     switch textField {
     case originTextField:
       self.pickerViewData = Origin.countries.compactMap{ $0.name }
-    case productTypeTextField:
-      self.pickerViewData = ProductType.allCases.compactMap{ $0.rawValue }
-    case roastTextField:
-      self.pickerViewData = RoastType.allCases.compactMap{ $0.rawValue }
     default:
       print("Configured the picker view for the wrong type.")
       return
@@ -256,6 +271,95 @@ extension ProductDetailViewController{
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     picker.dismiss(animated: true, completion: nil)
     guard let photo = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
-    self.photos.append(photo)
+    photos.append(photo)
+  }
+}
+
+//MARK: - UICollectionViewDataSource
+extension ProductDetailViewController: UICollectionViewDataSource{
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    if collectionView == productTypeCollectionView{
+      return ProductType.allCases.count
+    }else{
+      return RoastType.allCases.count
+    }
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "iconPhotoCell", for: indexPath) as! IconCollectionViewCell
+    if collectionView == productTypeCollectionView{
+      let productType = ProductType.allCases[indexPath.row]
+      cell.iconImageView.image = productType.icon
+      cell.iconLabel.text = productType.description
+      if productType == product?.productType{
+        setSelectedItem(for: collectionView, at: indexPath)
+        //        setSelectedItem(for: collectionView, at: indexPath)
+      }
+    }else{
+      let roastType = RoastType.allCases[indexPath.row]
+      cell.iconImageView.image = roastType.icon
+      cell.iconLabel.text = roastType.rawValue
+      if let beans = product as? CoffeeBean, beans.roastType == roastType{
+        //        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+        setSelectedItem(for: collectionView, at: indexPath)
+      }
+    }
+    return cell
+  }
+}
+
+//MARK: - UICollectionViewDelegate
+extension ProductDetailViewController: UICollectionViewDelegateFlowLayout{
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    setSelectedItem(for: collectionView, at: indexPath)
+  }
+  
+  //Not A delegate method
+  func setSelectedItem(for collectionView: UICollectionView, at indexPath: IndexPath){
+    let cell = collectionView.cellForItem(at: indexPath) as? IconCollectionViewCell
+    if collectionView == productTypeCollectionView{
+      let productType = ProductType.allCases[indexPath.row]
+      self.productType = productType
+      if productType == .coffeeBean{
+        customizeView(for: nil)
+      }else{
+        hideCoffeeBeanAttributes()
+      }
+    }else{
+      let roastType = RoastType.allCases[indexPath.row]
+      self.roastType = roastType
+    }
+    cell?.iconImageView.setImageColor(color: .mossGreen)
+    collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+    
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    let cell = collectionView.cellForItem(at: indexPath) as! IconCollectionViewCell
+    cell.iconImageView.setImageColor(color: .black)
+    if collectionView == productTypeCollectionView{
+      self.productType = nil
+    }else{
+      self.roastType = nil
+    }
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    if collectionView == productTypeCollectionView{
+      let width = (collectionView.frame.width - 17)/5
+      return CGSize(width: width, height: width)
+    }else {
+      let height = (collectionView.frame.width - 12) / 3
+      return CGSize(width: height, height: height)
+    }
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 2
   }
 }

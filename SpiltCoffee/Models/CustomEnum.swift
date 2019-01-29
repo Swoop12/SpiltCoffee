@@ -11,17 +11,3 @@ import Foundation
 protocol CustomEnum{
     var rawValue: String { get }
 }
-
-enum RoastType: String, CaseIterable, CustomEnum{
-    case light = "Light"
-    case medium = "Medium"
-    case dark = "Dark"
-}
-
-enum ProductType: String, CaseIterable, CustomEnum{
-    case coffeeBean
-    case kettle
-    case brewing
-    case grinder
-    case scale
-}

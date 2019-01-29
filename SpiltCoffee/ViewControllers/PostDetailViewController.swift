@@ -20,16 +20,13 @@ class PostDetailViewController: UIViewController {
   
   //MARK: - Properties
   var saveBarButtonItem: UIBarButtonItem!
-  var coverPhoto: [UIImage] = []
+  var coverPhoto: UIImage?
   
   //MARK: - Computed Properties
   var post: Post?{
     didSet{
       loadViewIfNeeded()
       updateViews()
-      if let photos = post?.photos, photos.count > 1{
-        self.coverPhoto = photos
-      }
     }
   }
   
@@ -74,11 +71,11 @@ class PostDetailViewController: UIViewController {
   
   func setPhotoSelectorImageView(){
     let photoSelector = self.childViewControllers[0] as? PhotoSelectorViewController
-    photoSelector?.photoImageView.image = post?.photos.first
+    //    photoSelector?.photoImageView.image = post?.photos.first
   }
   
   func permissionGuards(){
-    UserController.shared.currentUser?.uuid == post?.roasterMap[PostConstants.roasterIdKey] ? setViewForEditing() : setViewForReading()
+    UserController.shared.currentUser?.uuid == post?.roasterInfo[PostConstants.roasterInfoKey] ? setViewForEditing() : setViewForReading()
   }
   
   private func setViewForEditing() {
@@ -113,9 +110,15 @@ class PostDetailViewController: UIViewController {
         return
     }
     if let post = post{
-      PostController.shared.update(post: post, title: title, subtitle: subtitleTextField.text, bodyText: bodyTextView.text, photos: coverPhoto)
+      PostController.shared.update(post: post, title: title, subtitle: subtitleTextField.text, bodyText: bodyTextView.text, coverPhoto: coverPhoto) { post in
+        DispatchQueue.main.async {
+          guard let post = post else { self.presentSimpleAlertWith(title: "Whoops something went wrong", body: "Please make sure you are connected to the internet, and you may have to try again later")}
+        }
+      }
     }else{
-      PostController.shared.createPost(title: title, subtitle: subtitleTextField.text, author: author, bodyText: bodyTextView.text, photos: coverPhoto)
+      PostController.shared.createPost(title: title, subtitle: subtitleTextField.text, author: author, bodyText: bodyTextView.text, coverPhoto: coverPhoto) { post in
+        
+      }
     }
     self.navigationController?.popViewController(animated: true)
   }
@@ -136,6 +139,6 @@ class PostDetailViewController: UIViewController {
 //MARK: - PhotoSelectorViewControllerDelegate
 extension PostDetailViewController: PhotoSelectorViewControllerDeleate{
   func photoSelected(_ photo: UIImage) {
-    coverPhoto = [photo]
+    coverPhoto = photo
   }
 }

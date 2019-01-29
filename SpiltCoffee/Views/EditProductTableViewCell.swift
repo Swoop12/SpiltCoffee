@@ -10,7 +10,7 @@ import UIKit
 
 class EditProductTableViewCell: DataTableViewCell<Product> {
     
-    @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet weak var productImageView: ThumbNailImageView!
     @IBOutlet weak var editProductButton: UIButton!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -32,23 +32,8 @@ class EditProductTableViewCell: DataTableViewCell<Product> {
     
     func updateView(){
         guard let product = product else {return}
-        if let photo = product.photos.first{
-            productImageView.image = photo
-        }
+        productImageView.urlString = product.photoUrlStrings.first
         productNameLabel.text = product.name
         priceLabel.text = "$\(product.price)"
     }
-
-//    func setUpUI(){
-//        // editProductButtonButton
-//        self.editProductButton.layer.borderColor = UIColor(red: 0.71, green: 0.56, blue: 0.44, alpha: 1).cgColor
-//        self.editProductButton.layer.borderWidth = 1.0
-//        self.editProductButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
-//        self.editProductButton.layer.shadowRadius = 2.0
-//        self.editProductButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-//        self.editProductButton.layer.shadowOpacity = 1.0
-//        self.editProductButton.layer.masksToBounds = false
-//        self.editProductButton.layer.cornerRadius = 10.0
-//    }
-    
 }

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 protocol AbridgedDictionary{
-  var abridgedDictionary: [String : Any] {get}
+  var abridgedDictionary: [String : String] {get}
 }
 
 protocol FirestoreFetchable{
