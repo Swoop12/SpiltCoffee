@@ -17,10 +17,12 @@ class PostDetailViewController: UIViewController {
   @IBOutlet weak var subtitleTextField: UITextField!
   @IBOutlet weak var bookmarkButton: UIButton!
   @IBOutlet weak var photoSelectorContainerView: UIView!
+  @IBOutlet weak var deletePostButton: UIButton!
   
   //MARK: - Properties
   var saveBarButtonItem: UIBarButtonItem!
   var coverPhoto: UIImage?
+  var photoSelectorViewController: PhotoSelectorViewController!
   
   //MARK: - Computed Properties
   var post: Post?{
@@ -71,11 +73,11 @@ class PostDetailViewController: UIViewController {
   
   func setPhotoSelectorImageView(){
     let photoSelector = self.childViewControllers[0] as? PhotoSelectorViewController
-    //    photoSelector?.photoImageView.image = post?.photos.first
+    photoSelector?.imageUrlString = post?.thumbnailUrl
   }
   
   func permissionGuards(){
-    UserController.shared.currentUser?.uuid == post?.roasterInfo[PostConstants.roasterInfoKey] ? setViewForEditing() : setViewForReading()
+    UserController.shared.currentUser?.uuid == post?.roasterInfo[RoasterConstants.roasterIDKey] ? setViewForEditing() : setViewForReading()
   }
   
   private func setViewForEditing() {
@@ -83,6 +85,7 @@ class PostDetailViewController: UIViewController {
     subtitleTextField.isUserInteractionEnabled = true
     bodyTextView.isEditable = true
     bookmarkButton.isHidden = true
+    deletePostButton.isHidden = false
     self.navigationItem.rightBarButtonItem = saveBarButtonItem
     self.title = "Edit Post"
   }
@@ -92,6 +95,7 @@ class PostDetailViewController: UIViewController {
     subtitleTextField.isUserInteractionEnabled = false
     bodyTextView.isEditable = false
     bookmarkButton.isHidden = false
+    deletePostButton.isHidden = true
     self.navigationItem.rightBarButtonItem = nil
   }
   
@@ -112,7 +116,7 @@ class PostDetailViewController: UIViewController {
     if let post = post{
       PostController.shared.update(post: post, title: title, subtitle: subtitleTextField.text, bodyText: bodyTextView.text, coverPhoto: coverPhoto) { post in
         DispatchQueue.main.async {
-          guard let post = post else { self.presentSimpleAlertWith(title: "Whoops something went wrong", body: "Please make sure you are connected to the internet, and you may have to try again later")}
+          guard let _ = post else { self.presentSimpleAlertWith(title: "Whoops something went wrong", body: "Please make sure you are connected to the internet, and you may have to try again later") ; return }
         }
       }
     }else{
@@ -134,11 +138,36 @@ class PostDetailViewController: UIViewController {
   @IBAction func superViewTapped(_ sender: Any) {
     bodyTextView.resignFirstResponder()
   }
+  
+  @IBAction func deletePostButtonTapped(_ sender: Any) {
+    guard let post = post else { return }
+    presentAreYouSureAlert(title: "Are you sure you want to delete this Post", body: "You cannot recover this conent after you delete it") { (_) in
+      UIApplication.shared.isNetworkActivityIndicatorVisible = true
+      PostController.shared.deletePost(post: post, completion: { (success) in
+        DispatchQueue.main.async {
+          UIApplication.shared.isNetworkActivityIndicatorVisible = false
+          if !success{
+            self.presentSimpleAlertWith(title: "Whoops something went wrong", body: "Please make sure you are connected to the internet.  You may have to try again later ):")
+          }else {
+            self.navigationController?.popViewController(animated: true)
+          }
+        }
+      })
+    }
+  }
 }
-
 //MARK: - PhotoSelectorViewControllerDelegate
 extension PostDetailViewController: PhotoSelectorViewControllerDeleate{
   func photoSelected(_ photo: UIImage) {
     coverPhoto = photo
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "toPhotoSelector"{
+      let destination = segue.destination as! PhotoSelectorViewController
+      photoSelectorViewController = destination
+      destination.delegate = self
+      destination.imageUrlString = post?.thumbnailUrl
+    }
   }
 }

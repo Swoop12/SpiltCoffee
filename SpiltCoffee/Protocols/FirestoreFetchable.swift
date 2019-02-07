@@ -13,7 +13,7 @@ protocol AbridgedDictionary{
   var abridgedDictionary: [String : String] {get}
 }
 
-protocol FirestoreFetchable{
+protocol FirestoreFetchable: class{
   //MARK: - Properties
   var uuid: String {get}
   static var CollectionName: String {get}
@@ -46,7 +46,7 @@ extension FirestoreFetchable {
           dict[propertyName] = enumValue.rawValue
         }else if let origin = attribute.value as? Origin{
           dict[propertyName] = origin.name
-        }else if attribute.value is String || attribute.value is Int || attribute.value is Double || attribute.value is [String] || attribute.value is [Int]{
+        }else if attribute.value is Codable{
           dict[propertyName] = attribute.value
         }
       }

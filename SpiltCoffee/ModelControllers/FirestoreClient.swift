@@ -15,9 +15,16 @@ class FirestoreClient{
   static let shared = FirestoreClient()
   private init() {}
   
+  var objectCache = Cache<FirestoreFetchable>()
+  var imageCache = Cache<UIImage>()
+  
   //MARK: - Methods
     //MARK: - Generic Object Fetch
   func fetchFromFirestore<T: FirestoreFetchable>(objectID: String, completion: @escaping (T?) -> ()){
+    if let object = objectCache.obejectFor(key: objectID) as? T{
+      completion(object)
+      return
+    }
     let docRef = Firestore.firestore().collection(T.CollectionName).document(objectID)
     docRef.getDocument { (docSnap, error) in
       if let error = error{
@@ -67,9 +74,9 @@ class FirestoreClient{
   }
   
     //MARK: - Photo Uploads
-  func updatePhotoReferences<T: FirestorePhotos>(for firestoreObject: T, photos: [UIImage]){
+  private func updatePhotoReferences<T: FirestorePhotos>(for firestoreObject: T, photos: [UIImage]){
     let urls = photos.enumerated().compactMap { (index, image) -> String in
-      return "\(T.CollectionName)/\(firestoreObject.uuid)"
+      return "\(T.CollectionName)/\(firestoreObject.uuid)/picture\(index + 1)"
     }
     firestoreObject.photoUrlStrings = urls
     firestoreObject.documentReference.updateData(["photoUrlStrings" : urls])
@@ -78,12 +85,14 @@ class FirestoreClient{
   func upload(_ image: UIImage, toStoragePath path: String, completion: ((Bool) -> Void)?){
     guard let photoData = image.data else { completion?(false) ; return }
     let storageRef = Storage.storage().reference().child(path)
+    self.imageCache.insert(image, key: path)
     storageRef.putData(photoData, metadata: nil) { (_, error) in
       if let error = error{
         print("\(error.localizedDescription) \(error) in function: \(#function)")
         completion?(false)
         return
       }
+      completion?(true)
     }
   }
   
@@ -92,7 +101,7 @@ class FirestoreClient{
     let dispatchGroup = DispatchGroup()
     for (index, photo) in photos.enumerated(){
       dispatchGroup.enter()
-      upload(photo, toStoragePath: "\(T.CollectionName)\(firestoreObject.uuid)/picture\(index)") { (_) in
+      upload(photo, toStoragePath: "\(T.CollectionName)/\(firestoreObject.uuid)/picture\(index + 1)") { (_) in
         dispatchGroup.leave()
       }
     }
@@ -103,16 +112,22 @@ class FirestoreClient{
   
   //MARK: - General Photo Fetch
   func fetchPhotoFromStorage(for path: String, completion: @escaping (UIImage?) -> ()){
-    let path = Storage.storage().reference().child(path)
-    path.getData(maxSize: 2 * 1024 * 1024) { (data, error) in
+    if let photo = imageCache.obejectFor(key: path){
+      completion(photo)
+      return
+    }
+    let storageRef = Storage.storage().reference().child(path)
+    storageRef.getData(maxSize: 2 * 1024 * 1024) { (data, error) in
       if let error = error {
         print("💩  There was an error in \(#function) ; \(error)  ; \(error.localizedDescription)  💩")
         completion(nil)
         return
       }
-      guard let data = data else {completion(nil) ; return }
-      let image = UIImage(data: data)
-      completion(image)
+      guard let data = data else { completion(nil) ; return }
+      if let image = UIImage(data: data){
+        self.imageCache.insert(image, key: path)
+        completion(image)
+      }
     }
   }
   
@@ -125,6 +140,7 @@ class FirestoreClient{
         completion?(false)
         return
       }
+      self.objectCache.insert(object, key: object.uuid)
       completion?(true)
     }
   }
@@ -137,6 +153,7 @@ class FirestoreClient{
         completion?(false)
         return
       }else {
+        self.objectCache.deleteObjectFor(key: firestoreObject.uuid)
         completion?(true)
       }
     }
@@ -191,6 +208,10 @@ class FirestoreClient{
       completion(returnArray)
     }
   }
+}
+
+extension FirestoreClient: CachingController{
+  typealias Cachable = FirestoreFetchable
 }
 
 //MARK: - FirestoreQuery

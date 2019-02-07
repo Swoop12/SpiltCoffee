@@ -18,12 +18,18 @@ class SpiltTabBarController: UITabBarController {
             let shop = UIStoryboard(name: "Shop", bundle: .main).instantiateInitialViewController(),
             let brew = UIStoryboard(name: "Brew", bundle: .main).instantiateInitialViewController(),
             let discover = UIStoryboard(name: "Discover", bundle: .main).instantiateInitialViewController() else {return}
-        
-        home.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "HomeIconSmall"), selectedImage: #imageLiteral(resourceName: "HomeIconSmall"))
-        profile.tabBarItem = UITabBarItem(title: "Profile", image: #imageLiteral(resourceName: "ProfileIconSmall"), selectedImage: #imageLiteral(resourceName: "ProfileIconSmall"))
-        shop.tabBarItem = UITabBarItem(title: "Shop", image: #imageLiteral(resourceName: "CartIconSmall"), selectedImage: #imageLiteral(resourceName: "CartIconSmall"))
-        brew.tabBarItem = UITabBarItem(title: "Brew", image: #imageLiteral(resourceName: "CoffeeIconSmall"), selectedImage: #imageLiteral(resourceName: "CoffeeIconSmall"))
-        discover.tabBarItem = UITabBarItem(title: "Discover", image: #imageLiteral(resourceName: "DiscoverIconSmall"), selectedImage: #imageLiteral(resourceName: "DiscoverIconSmall"))
+      
+      let homeIcon = #imageLiteral(resourceName: "home").withRenderingMode(.alwaysTemplate)
+      let profileIcon = #imageLiteral(resourceName: "barista").withRenderingMode(.alwaysTemplate)
+      let shopIcon = #imageLiteral(resourceName: "shop").withRenderingMode(.alwaysTemplate)
+      let brewIcon = #imageLiteral(resourceName: "brew").withRenderingMode(.alwaysTemplate)
+      let discoverIcon = #imageLiteral(resourceName: "discover").withRenderingMode(.alwaysTemplate)
+      
+        home.tabBarItem = UITabBarItem(title: "Home", image: homeIcon, selectedImage: homeIcon)
+        profile.tabBarItem = UITabBarItem(title: "Profile", image: profileIcon, selectedImage: profileIcon)
+        shop.tabBarItem = UITabBarItem(title: "Shop", image: shopIcon, selectedImage: shopIcon)
+        brew.tabBarItem = UITabBarItem(title: "Brew", image: brewIcon, selectedImage: brewIcon)
+        discover.tabBarItem = UITabBarItem(title: "Discover", image: discoverIcon, selectedImage: discoverIcon)
         
         tabBar.tintColor = UIColor.mossGreen
         if let profileNav = profile as? UINavigationController{

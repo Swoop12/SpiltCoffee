@@ -14,6 +14,8 @@ class PostController {
   static let shared = PostController()
   private init(){}
   
+  var objectCache = Cache<Post>()
+  
   //MARK: - CRUD Methods
   func createPost(title: String, subtitle: String?, author: Roaster, bodyText: String, coverPhoto: UIImage?, completion: ((Post?) -> Void)?){
     let post = Post(title: title, subtitle: subtitle, roasterInfo: author.abridgedDictionary, bodyText: bodyText)
@@ -25,12 +27,14 @@ class PostController {
     FirestoreClient.shared.saveToFirestore(post) { (success) in
       success ? completion?(post) : completion?(nil)
     }
+    objectCache.insert(post, key: post.uuid)
   }
   
   func update(post: Post, title: String, subtitle: String?, bodyText: String, coverPhoto: UIImage?, completion: ((Post?) -> Void)?){
     post.title = title
     post.subtitle = subtitle
     post.bodyText = bodyText
+    FirestoreClient.shared.update(object: post, completion: nil)
     guard let coverPhoto = coverPhoto else { completion?(nil) ; return }
     saveCoverPhoto(for: post, image: coverPhoto) { (success) in
       success ? completion?(post) : completion?(nil)
@@ -38,7 +42,7 @@ class PostController {
   }
   
   func saveCoverPhoto(for post: Post, image: UIImage, completion: @escaping (Bool) -> Void){
-    let path = "posts/\(post.uuid)"
+    let path = "\(Post.CollectionName)/\(post.uuid).jpg"
     FirestoreClient.shared.upload(image, toStoragePath: path, completion: completion)
   }
   
@@ -62,4 +66,8 @@ class PostController {
   func deletePost(post: Post, completion: ((Bool) -> Void)?){
     FirestoreClient.shared.deleteFromFirestore(post, completion: completion)
   }
+}
+
+extension PostController: CachingController{
+  typealias Cachable = Post
 }

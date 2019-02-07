@@ -17,13 +17,11 @@ class ThumbNailImageView: UIImageView {
   }
   
   func loadAndDisplayImage(){
-    guard let urlString = urlString else { hide() ; return }
+    guard let urlString = urlString else { return }
     FirestoreClient.shared.fetchPhotoFromStorage(for: urlString) { (image) in
       DispatchQueue.main.async {
         if let image = image{
           self.image = image
-        }else {
-          self.hide()
         }
       }
     }

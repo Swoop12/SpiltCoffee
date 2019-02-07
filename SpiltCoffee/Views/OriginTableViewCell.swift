@@ -40,11 +40,10 @@ class OriginTableViewCell: UITableViewCell{
     func updateViews(){
         originNameLabel.text = origin?.name
         let urlName = origin?.name.replacingOccurrences(of: " ", with: "")
-        let storageRef = Storage.storage().reference().child("Origins/\(urlName ?? "unknown").jpg")
         if let image = origin?.image{
             self.bgImage.image = image
         }else{
-            FirestoreClient.shared.fetchPhotoFromStorage(for: storageRef) { (image) in
+            FirestoreClient.shared.fetchPhotoFromStorage(for: "Origins/\(urlName ?? "unknown").jpg") { (image) in
                 guard let image = image else { return }
                 self.origin?.image = image
             }

@@ -23,10 +23,9 @@ class ProductDetailViewController: UIViewController{
   @IBOutlet var pickerView: UIPickerView!
   @IBOutlet weak var productTypeCollectionView: UICollectionView!
   @IBOutlet weak var roastTypeCollectionView: UICollectionView!
-  @IBOutlet weak var addPhotosButton: UIButton!
   
   //MARK: - Properties
-  var photoPagerViewController: PhotoPagerViewController?
+  var photoPagerViewController: PhotoPagerViewContoller?
   var photoCollectionViewDataSource: DataViewGenericDataSource<UIImage>!
   var pickerViewData: [String]?
   var productType: ProductType?
@@ -42,12 +41,7 @@ class ProductDetailViewController: UIViewController{
     didSet{
       loadViewIfNeeded()
       updateViews()
-    }
-  }
-  
-  var photos: [UIImage] = []{
-    didSet{
-      photoPagerViewController?.photos = photos
+      setPhotoPagerUrlsForSelectedProduct()
     }
   }
   
@@ -89,7 +83,7 @@ class ProductDetailViewController: UIViewController{
       descriptionTextView.text = product.description
       priceTextField.text = "\(product.price)"
       purchaseButton.setTitle("$\(product.price)", for: .normal)
-      self.photos = product.photos
+//      self.photos = product.photos
       if let bean = product as? CoffeeBean{
         customizeView(for: bean)
       }
@@ -138,10 +132,12 @@ class ProductDetailViewController: UIViewController{
   }
   
   func lockPermissionGuards(){
-    if UserController.shared.currentUser?.uuid == product?.roasterAbridgedDictionary?["uuid"] as? String || product == nil{
+    if UserController.shared.currentUser?.uuid == product?.roasterAbridgedDictionary["uuid"] as? String || product == nil{
       setViewForEditing()
+      photoPagerViewController?.isEditingEnabled = true
     }else{
       setViewForReading()
+      photoPagerViewController?.isEditingEnabled = false
     }
   }
   
@@ -168,6 +164,7 @@ class ProductDetailViewController: UIViewController{
         self.presentSimpleAlertWith(title: "Whoops looks like we're missing some info", body: "Please make sure you have filled in all the necessary fields")
         return
     }
+    let photos = photoPagerViewController?.photos
     var origin: Origin?
     if let originString = originTextField.text, !originString.isEmpty{
       origin = Origin(name: originString)
@@ -181,14 +178,23 @@ class ProductDetailViewController: UIViewController{
     }else if let product = product{
       ProductController.shared.update(product: product, name: name, price: price, description: description, photos: photos, productType: productType, completion: nil)
     }else{
-      ProductController.shared.createProduct(name: name, price: price, description: description, photos: photos, roaster: roaster, productType: productType, completion: nil)
+      ProductController.shared.createProduct(name: name, price: price, description: description, photos: photos ?? [], roaster: roaster, productType: productType, completion: nil)
     }
     self.navigationController?.popViewController(animated: true)
   }
   
+  func setPhotoPagerUrlsForSelectedProduct() {
+    guard let urls = product?.photoUrlStrings else { return }
+    photoPagerViewController?.setPagerFor(urls: urls)
+  }
+  
   //MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    self.photoPagerViewController = segue.destination as? PhotoPagerViewController
+    if segue.identifier == "toPhotoPager" {
+      self.photoPagerViewController = segue.destination as? PhotoPagerViewContoller
+      
+      setPhotoPagerUrlsForSelectedProduct()
+    }
   }
   
   //MARK: - IBActions
@@ -204,7 +210,7 @@ class ProductDetailViewController: UIViewController{
   }
   
   @IBAction func purchaseButtonTapped(_ sender: Any) {
-    self.presentSimpleAlertWith(title: "Visit \(self.product?.roaster?.name ?? "the Roasters") Website to Purchase", body: "In app purchases coming soon (:")
+    self.presentSimpleAlertWith(title: "Visit \(self.product?.roasterAbridgedDictionary["name"] ?? "the Roaster")'s Website to Purchase", body: "In app purchases coming soon (:")
   }
   
   @IBAction func addPhotoButtonTapped(_ sender: Any) {
@@ -263,15 +269,6 @@ extension ProductDetailViewController: UIPickerViewDelegate, UIPickerViewDataSou
     }
     pickerView.reloadAllComponents()
     textField.inputView = pickerView
-  }
-}
-
-//MARK: - ImagePickerDelegate
-extension ProductDetailViewController{
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    picker.dismiss(animated: true, completion: nil)
-    guard let photo = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
-    photos.append(photo)
   }
 }
 

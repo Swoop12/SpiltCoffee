@@ -32,20 +32,20 @@ class RoasterProfilePostsViewController: UIViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    updateViews()
+    fetchAndDisplayPostsForRoaster()
   }
   
   //MARK: - Functions
   func fetchAndDisplayPostsForRoaster(){
     guard let roaster = roaster else {return}
-    FirestoreClient.shared.fetchAllObjectsWhere("author.roasterID", .equals, roaster.uuid, orderedBy: nil, limitedTo: nil) { (posts: [Post]?) in
+    FirestoreClient.shared.fetchAllObjectsWhere("\(RoasterConstants.roasterInfoKey).\(RoasterConstants.roasterIDKey)", .equals, roaster.uuid, orderedBy: nil, limitedTo: nil) { (posts: [Post]?) in
       guard let posts = posts else { return }
       DispatchQueue.main.async {
         self.posts = posts
         self.postCollectionViewDataSource = DataViewGenericDataSource(dataView: self.postsCollectionView, dataType: .post, data: posts)
         self.postCollectionViewDataSource.delegate = self
         self.postCollectionViewDataSource.roasterBio = self.roaster?.bio
-        self.postCollectionViewDataSource.buttonIsHidden = !(roaster == UserController.shared.currentUser)
+        self.postCollectionViewDataSource.buttonIsHidden = !(self.roaster == UserController.shared.currentUser)
       }
     }
   }
@@ -53,6 +53,7 @@ class RoasterProfilePostsViewController: UIViewController{
   func updateViews(){
     if let posts = self.posts{
       postCollectionViewDataSource.sourceOfTruth = posts
+      postsCollectionView.reloadData()
     }
   }
   

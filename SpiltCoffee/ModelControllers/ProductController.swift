@@ -15,6 +15,8 @@ class ProductController{
   static let shared = ProductController()
   private init(){}
   
+  var objectCache = Cache<Product>()
+  
   //MARK: - Create
   func createProduct(name: String, price: Double, description: String, photos: [UIImage], roaster: Roaster, productType: ProductType, completion: ((Product?) -> Void)?){
     guard productType != .coffeeBean else { completion?(nil) ; return }
@@ -75,7 +77,7 @@ class ProductController{
       "productType" : productType.rawValue
     ]
     if let photos = photos{
-      product.photos = photos
+      FirestoreClient.shared.upload(photos: photos, for: product, completion: nil)
     }
     product.documentReference.updateData(dictionary) { (error) in
       if let error = error{
@@ -125,63 +127,9 @@ class ProductController{
     currentUser.documentReference.updateData(["favoriteBeanIDs": FieldValue.arrayRemove([bean.uuid])])
     bean.documentReference.updateData(["favoriteCount": bean.favoriteCount ])
   }
-  
-  //  func uploadPhotos(for product: Product, completion: ((Bool) -> Void)?){
-  //        let dispatchGroup = DispatchGroup()
-  //        for i in 0..<product.photosData.count{
-  //          dispatchGroup.enter()
-  //          print("entering dipatch Group")
-  //          let storageRef = Storage.storage().reference().child("\(T.CollectionName)").child("\(firestoreObject.uuid)").child("picture\(i+1)")
-  //          storageRef.putData(photosData[i], metadata: nil) { (_, error) in
-  //            if let error = error {
-  //              print("💩  There was an error in \(#function) ; \(error)  ; \(error.localizedDescription)  💩")
-  //              completion(false)
-  //              dispatchGroup.leave()
-  //              print("leaving dispatch Group beacause of error")
-  //              return
-  //            }else {
-  //              let urlString = "\(T.CollectionName)/\(firestoreObject.uuid)/picture\(i + 1)"
-  //              print("photo successfully saved to storage at \(urlString)")
-  //              firestoreObject.photoUrlStrings.append(urlString)
-  //              dispatchGroup.leave()
-  //              print("leaving dispatch Group beacause of successful upload")
-  //            }
-  //          }
-  //        }
-  //        dispatchGroup.notify(queue: .main) {
-  //          print("Now completing with photos")
-  //          completion(true)
-  //        }
-  //  }
-  //  func uploadPhotos<T: FirestorePhotos>(for firestoreObject: T, completion: @escaping (Bool) -> ()){
-  //    let photosData = firestoreObject.photosData
-  //
-  //    print("uploading \(photosData.count) photos")
-  //    let dispatchGroup = DispatchGroup()
-  //    print("creating dispatchGroup")
-  //    for i in 0..<photosData.count{
-  //      dispatchGroup.enter()
-  //      print("entering dipatch Group")
-  //      let storageRef = Storage.storage().reference().child("\(T.CollectionName)").child("\(firestoreObject.uuid)").child("picture\(i+1)")
-  //      storageRef.putData(photosData[i], metadata: nil) { (_, error) in
-  //        if let error = error {
-  //          print("💩  There was an error in \(#function) ; \(error)  ; \(error.localizedDescription)  💩")
-  //          completion(false)
-  //          dispatchGroup.leave()
-  //          print("leaving dispatch Group beacause of error")
-  //          return
-  //        }else {
-  //          let urlString = "\(T.CollectionName)/\(firestoreObject.uuid)/picture\(i + 1)"
-  //          print("photo successfully saved to storage at \(urlString)")
-  //          firestoreObject.photoUrlStrings.append(urlString)
-  //          dispatchGroup.leave()
-  //          print("leaving dispatch Group beacause of successful upload")
-  //        }
-  //      }
-  //    }
-  //    dispatchGroup.notify(queue: .main) {
-  //      print("Now completing with photos")
-  //      completion(true)
-  //    }
-  //  }
+}
+
+//MARK: - CachingController
+extension ProductController: CachingController{
+  typealias Cachable = Product
 }

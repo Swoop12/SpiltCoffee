@@ -24,7 +24,7 @@ class Post: FirestoreFetchable{
   var bookmarkCount: Int
   
   var thumbnailUrl: String{
-    return "\(Post.CollectionName)/\(uuid)"
+    return "\(Post.CollectionName)/\(uuid).jpg"
   }
   
   //MARK: - Initializers
@@ -45,9 +45,9 @@ class Post: FirestoreFetchable{
       let timestamp = dictionary[PostConstants.dateKey] as? Timestamp,
       let bodyText = dictionary[PostConstants.bodyTextKey] as? String,
       let likesCount = dictionary[PostConstants.likesCountKey] as? Int,
-      let roasterInfo = dictionary[PostConstants.roasterInfoKey] as? [String : String] ,
-      let bookmarkCount = dictionary["bookmarkCount"] as? Int,
-      let isFeatured = dictionary["isFeatured"] as? Bool else {return nil}
+      let roasterInfo = dictionary[RoasterConstants.roasterInfoKey] as? [String : String] ,
+      let bookmarkCount = dictionary[PostConstants.bookmarkCountKey] as? Int,
+      let isFeatured = dictionary[PostConstants.isFeaturedKey] as? Bool else { return nil }
     
     let date = timestamp.dateValue()
     let subtitle = dictionary[PostConstants.subtitleKey] as? String
@@ -69,8 +69,9 @@ struct PostConstants{
   static let titleKey = "title"
   static let subtitleKey = "subtitle"
   static let dateKey = "date"
-  static let roasterInfoKey = "author"
   static let bodyTextKey = "bodyText"
   static let coverPhotoUrlKey = "coverPhotoUrl"
   static let likesCountKey = "likesCount"
+  static let bookmarkCountKey = "bookmarkCount"
+  static let isFeaturedKey = "isFeatured"
 }

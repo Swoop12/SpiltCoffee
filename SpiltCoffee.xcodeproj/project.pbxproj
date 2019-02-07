@@ -72,10 +72,11 @@
 		F748C20B218F9EDC006838B7 /* PostCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F748C209218F9EDC006838B7 /* PostCollectionReusableView.swift */; };
 		F757A4E121FEA6AC00A9CFAD /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E021FEA6AC00A9CFAD /* UIImageViewExtension.swift */; };
 		F757A4E321FEC05900A9CFAD /* PhotoPager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F757A4E221FEC05900A9CFAD /* PhotoPager.storyboard */; };
-		F757A4E521FEC27D00A9CFAD /* PhotoPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E421FEC27D00A9CFAD /* PhotoPagerViewController.swift */; };
-		F757A4E721FECCFD00A9CFAD /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E621FECCFD00A9CFAD /* PhotoViewController.swift */; };
+		F757A4E721FECCFD00A9CFAD /* PhotoPagerViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E621FECCFD00A9CFAD /* PhotoPagerViewContoller.swift */; };
 		F757A4E921FF737A00A9CFAD /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4E821FF737A00A9CFAD /* UIImageExtension.swift */; };
 		F757A4EB21FFBDA000A9CFAD /* ThumbNailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4EA21FFBDA000A9CFAD /* ThumbNailImageView.swift */; };
+		F757A4ED2200077A00A9CFAD /* CachingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4EC2200077A00A9CFAD /* CachingController.swift */; };
+		F757A4EF22000B1700A9CFAD /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757A4EE22000B1700A9CFAD /* Cache.swift */; };
 		F75E0FFF2170080600534B9C /* FirestoreFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E0FFE2170080600534B9C /* FirestoreFetchable.swift */; };
 		F75E100121702D3F00534B9C /* FirestorePhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E100021702D3F00534B9C /* FirestorePhotos.swift */; };
 		F75E100321702D8000534B9C /* FirestoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E100221702D8000534B9C /* FirestoreClient.swift */; };
@@ -120,6 +121,9 @@
 		F7D7BFA3217A93DA00B02920 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7D7BF9B217A936700B02920 /* Lato-Regular.ttf */; };
 		F7DE77D221825A5D00817CD9 /* LaunchCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DE77D121825A5D00817CD9 /* LaunchCopyViewController.swift */; };
 		F7EA96C8219A0C44002E0087 /* AeroPress.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F7EA96C7219A0C44002E0087 /* AeroPress.mp4 */; };
+		F7F46C83220628190020C0B0 /* PhotoPagerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F46C82220628190020C0B0 /* PhotoPagerCell.swift */; };
+		F7F46C85220635E80020C0B0 /* FetchImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F46C84220635E80020C0B0 /* FetchImageView.swift */; };
+		F7F46C87220637F20020C0B0 /* PhotoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F46C86220637F20020C0B0 /* PhotoSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,10 +196,11 @@
 		F748C209218F9EDC006838B7 /* PostCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionReusableView.swift; sourceTree = "<group>"; };
 		F757A4E021FEA6AC00A9CFAD /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		F757A4E221FEC05900A9CFAD /* PhotoPager.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoPager.storyboard; sourceTree = "<group>"; };
-		F757A4E421FEC27D00A9CFAD /* PhotoPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPagerViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		F757A4E621FECCFD00A9CFAD /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		F757A4E621FECCFD00A9CFAD /* PhotoPagerViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPagerViewContoller.swift; sourceTree = "<group>"; };
 		F757A4E821FF737A00A9CFAD /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		F757A4EA21FFBDA000A9CFAD /* ThumbNailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbNailImageView.swift; sourceTree = "<group>"; };
+		F757A4EC2200077A00A9CFAD /* CachingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingController.swift; sourceTree = "<group>"; };
+		F757A4EE22000B1700A9CFAD /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		F75E0FFE2170080600534B9C /* FirestoreFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreFetchable.swift; sourceTree = "<group>"; };
 		F75E100021702D3F00534B9C /* FirestorePhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorePhotos.swift; sourceTree = "<group>"; };
 		F75E100221702D8000534B9C /* FirestoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreClient.swift; sourceTree = "<group>"; };
@@ -241,6 +246,9 @@
 		F7D7BF9B217A936700B02920 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		F7DE77D121825A5D00817CD9 /* LaunchCopyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCopyViewController.swift; sourceTree = "<group>"; };
 		F7EA96C7219A0C44002E0087 /* AeroPress.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = AeroPress.mp4; sourceTree = "<group>"; };
+		F7F46C82220628190020C0B0 /* PhotoPagerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPagerCell.swift; sourceTree = "<group>"; };
+		F7F46C84220635E80020C0B0 /* FetchImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageView.swift; sourceTree = "<group>"; };
+		F7F46C86220637F20020C0B0 /* PhotoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +316,7 @@
 				F7D4C57621F8F26C002C6646 /* RoastType.swift */,
 				F7D4C57821F8F291002C6646 /* PhotoDescribableEnum.swift */,
 				F7D4C57A21F8F3B2002C6646 /* ProductType.swift */,
+				F7F46C86220637F20020C0B0 /* PhotoSource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,6 +349,7 @@
 				91C2C12479FD7D11EB3778D5 /* Extensions */,
 				681242C7F1CCCC311F86BEE8 /* Graphics */,
 				27D4475B21C632613F39B222 /* Interface */,
+				F757A4EE22000B1700A9CFAD /* Cache.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -458,6 +468,8 @@
 				F748C209218F9EDC006838B7 /* PostCollectionReusableView.swift */,
 				F70B9AFF2194238300895D52 /* RecepieVideoView.swift */,
 				F7D4C57D21F95392002C6646 /* IconCollectionViewCell.swift */,
+				F7F46C82220628190020C0B0 /* PhotoPagerCell.swift */,
+				F7F46C84220635E80020C0B0 /* FetchImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -488,8 +500,7 @@
 				F7673ADF217E69CF00C1BB3F /* WelcomeViewController.swift */,
 				F7DE77D121825A5D00817CD9 /* LaunchCopyViewController.swift */,
 				F77B539121869B6D00EF04E1 /* AddShopViewController.swift */,
-				F757A4E421FEC27D00A9CFAD /* PhotoPagerViewController.swift */,
-				F757A4E621FECCFD00A9CFAD /* PhotoViewController.swift */,
+				F757A4E621FECCFD00A9CFAD /* PhotoPagerViewContoller.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -505,6 +516,7 @@
 				F75E0FFE2170080600534B9C /* FirestoreFetchable.swift */,
 				F75E100021702D3F00534B9C /* FirestorePhotos.swift */,
 				F72CC7E32174EB230031CF1C /* DesignCellData.swift */,
+				F757A4EC2200077A00A9CFAD /* CachingController.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -691,6 +703,7 @@
 				F72A0A3E21679F13006F383A /* PostDetailViewController.swift in Sources */,
 				DD7384A709472C85D6F9862F /* CoffeeBeanCollectionViewCell.swift in Sources */,
 				F77B53902186971000EF04E1 /* ShopController.swift in Sources */,
+				F7F46C83220628190020C0B0 /* PhotoPagerCell.swift in Sources */,
 				F73515A22166615B005DA280 /* AddProductTableViewController.swift in Sources */,
 				F72CC7E42174EB230031CF1C /* DesignCellData.swift in Sources */,
 				695560E4210A432F00CFFD7A /* Enthusiast.swift in Sources */,
@@ -709,6 +722,7 @@
 				F72E91AA2177DAF200D13300 /* ProfileImageView.swift in Sources */,
 				F7CD697E2188DC31006C91C2 /* ShopAnnotation.swift in Sources */,
 				F757A4EB21FFBDA000A9CFAD /* ThumbNailImageView.swift in Sources */,
+				F757A4EF22000B1700A9CFAD /* Cache.swift in Sources */,
 				F7177393216A6B0D0004693E /* EditProfileTableViewController.swift in Sources */,
 				F72CC7E62174ED510031CF1C /* ProductCategoriesTableViewController.swift in Sources */,
 				F7D4C57E21F95392002C6646 /* IconCollectionViewCell.swift in Sources */,
@@ -716,7 +730,7 @@
 				F72A0A3C216799B3006F383A /* PostController.swift in Sources */,
 				69BCEEB821090A7100F2D88E /* StyleGuide.swift in Sources */,
 				F7DE77D221825A5D00817CD9 /* LaunchCopyViewController.swift in Sources */,
-				F757A4E721FECCFD00A9CFAD /* PhotoViewController.swift in Sources */,
+				F757A4E721FECCFD00A9CFAD /* PhotoPagerViewContoller.swift in Sources */,
 				F79B07FE21642E21004B8748 /* StringExtension.swift in Sources */,
 				F717738B216A64D70004693E /* UIViewExtension.swift in Sources */,
 				9CCBC069932383367B95213B /* AppDelegate.swift in Sources */,
@@ -730,7 +744,6 @@
 				F79B07F621641C4F004B8748 /* DataCells.swift in Sources */,
 				6974777E210D01C7004189AC /* CoffeeBean.swift in Sources */,
 				F79B07F421640E45004B8748 /* DataView.swift in Sources */,
-				F757A4E521FEC27D00A9CFAD /* PhotoPagerViewController.swift in Sources */,
 				F75E100321702D8000534B9C /* FirestoreClient.swift in Sources */,
 				F72A0A422167A0BE006F383A /* PhotoCollectionViewCell.swift in Sources */,
 				F75E0FFF2170080600534B9C /* FirestoreFetchable.swift in Sources */,
@@ -743,6 +756,7 @@
 				69306A5921124A2600C81D37 /* DateHelper.swift in Sources */,
 				F7D4C57721F8F26C002C6646 /* RoastType.swift in Sources */,
 				F796D0AD21656A85008A97EF /* UserProfileHeaderView.swift in Sources */,
+				F757A4ED2200077A00A9CFAD /* CachingController.swift in Sources */,
 				694A7BB6210FD57400B7C3E7 /* PostCollectionViewCell.swift in Sources */,
 				5205BBFF3209AC18D8487395 /* RecepieCollectionViewCell.swift in Sources */,
 				F72CC7E82174EE2A0031CF1C /* ConstantData.swift in Sources */,
@@ -753,10 +767,12 @@
 				AB3B9A298F127B7D6AFFA614 /* RoasterCollectionViewCell.swift in Sources */,
 				F7D4C57B21F8F3B2002C6646 /* ProductType.swift in Sources */,
 				695560E6210A434000CFFD7A /* Roaster.swift in Sources */,
+				F7F46C85220635E80020C0B0 /* FetchImageView.swift in Sources */,
 				69834F17211181CE00563AD0 /* RoasterTableViewCell.swift in Sources */,
 				695560EE210A4A5F00CFFD7A /* Product.swift in Sources */,
 				4518E17F5BF2E382851510D9 /* RoasterProfileViewController.swift in Sources */,
 				F735159E21665AD3005DA280 /* RoasterProfilePostsViewController.swift in Sources */,
+				F7F46C87220637F20020C0B0 /* PhotoSource.swift in Sources */,
 				F75FDC03217686700048060D /* ShopRoastersViewController.swift in Sources */,
 				8090A03C1B0BD5FAFDF7AFB6 /* BaseUserProfileViewController.swift in Sources */,
 				F7177395216A6F630004693E /* BoringdetailsViewController.swift in Sources */,

@@ -41,7 +41,7 @@ class ShopRoastersViewController: UIViewController {
             
             var roasterIdSet = Set<String>()
             for bean in beans{
-                if let roasterId = bean.roasterAbridgedDictionary?["uuid"] as? String{
+                if let roasterId = bean.roasterAbridgedDictionary["uuid"] as? String{
                     roasterIdSet.insert(roasterId)
                 }
             }

@@ -20,6 +20,8 @@ class RoasterProfileViewController: UIViewController {
   
   //MARK: - Properties
   var barButtonItemDummyARCCountHolder: UIBarButtonItem?
+  var productTableViewController: AddProductTableViewController?
+  var postsTableViewController: RoasterProfilePostsViewController?
   
   //MARK: - Computed Properties
   var roaster: Roaster?{
@@ -40,6 +42,7 @@ class RoasterProfileViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
     updateView()
   }
   
@@ -87,11 +90,11 @@ class RoasterProfileViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: self)
     if segue.identifier == "toPosts"{
-      let postsTVC = segue.destination as? RoasterProfilePostsViewController
-      postsTVC?.roaster = self.roaster
+      postsTableViewController = segue.destination as? RoasterProfilePostsViewController
+      postsTableViewController?.roaster = self.roaster
     }else if segue.identifier == "toProducts"{
-      let productsTVC = segue.destination as? AddProductTableViewController
-      productsTVC?.roaster = self.roaster
+      productTableViewController = segue.destination as? AddProductTableViewController
+      productTableViewController?.roaster = self.roaster
     }else if segue.identifier == "toShops"{
       let shopsTVC = segue.destination as? RoasterShopsTableViewController
       shopsTVC?.roaster = self.roaster

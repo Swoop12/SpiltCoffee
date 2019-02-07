@@ -37,8 +37,8 @@ class RecepieDetailViewController: UIViewController {
         ingredientsTextView.text = recepie?.instructions
         updateBookmarkButton()
         brewTimeTextField.text = "\(recepie?.brewTimeInMinutes ?? 0) minutes"
-        let photos = recipe.photos.isEmpty ? [recipe.brewMethod.image] : recipe.photos
-        photoDataSource = DataViewGenericDataSource(dataView: photosCollectionView, dataType: .photo, data: photos)
+//      let photos = recipe.photosData.isEmpty ? [recipe.brewMethod.image] : recipe.photos
+//        photoDataSource = DataViewGenericDataSource(dataView: photosCollectionView, dataType: .photo, data: photos)
     }
     
     func updateBookmarkButton(){

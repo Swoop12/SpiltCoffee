@@ -22,8 +22,8 @@ class Roaster: Enthusiast, AbridgedDictionary{
     
     var abridgedDictionary: [String : String]{
         return [
-            "uuid" : uuid,
-            "name" : name
+            RoasterConstants.nameKey : name,
+            RoasterConstants.roasterIDKey : uuid
         ]
     }
     
@@ -36,12 +36,15 @@ class Roaster: Enthusiast, AbridgedDictionary{
     }
     
     required init?(dictionary: [String : Any], id: String) {
-        guard let productIds = dictionary["productIds"] as? [String],
-            let postIds = dictionary["postIds"] as? [String] else {super.init(dictionary: dictionary, id: id) ; return nil }
+        guard let productIds = dictionary[RoasterConstants.productIDKey] as? [String],
+            let postIds = dictionary[RoasterConstants.postIDKey] as? [String] else {super.init(dictionary: dictionary, id: id) ; return nil }
         
-        let companyName = dictionary["companyName"] as? String
-        let bio = dictionary["bio"] as? String
-        let location = dictionary["location"] as? String
+        let companyName = dictionary[RoasterConstants.companyNameIDKey] as? String
+        let bio = dictionary[RoasterConstants.bioKey] as? String
+        let location = dictionary[RoasterConstants.location] as? String
+      if let isFeatured = dictionary[RoasterConstants.isFeaturedKey] as? Bool{
+        self.isFeatured = isFeatured
+      }
         
         self.productIds = productIds
         self.postIds = postIds
@@ -50,7 +53,16 @@ class Roaster: Enthusiast, AbridgedDictionary{
         self.location = location
         super.init(dictionary: dictionary, id: id)
     }
-    
-    
 }
 
+struct RoasterConstants {
+  static let nameKey = "name"
+  static let roasterInfoKey = "roasterInfo"
+  static let roasterIDKey = "roasterID"
+  static let productIDKey = "productIds"
+  static let postIDKey = "postIds"
+  static let companyNameIDKey = "companyName"
+  static let bioKey = "bio"
+  static let location = "location"
+  static let isFeaturedKey = "isFeatured"
+}

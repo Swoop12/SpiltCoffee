@@ -9,28 +9,9 @@
 import UIKit
 
 class Recepie: FirestorePhotos{
-    
-    
+  
     static let CollectionName: String = "Recipes"
-    
-    required init?(dictionary: [String : Any], id: String) {
-        guard let title = dictionary["title"] as? String,
-        let brewTimeInMinutes = dictionary["brewTimeInMinutes"] as? Int,
-        let instructions = dictionary["instructions"] as? String,
-        let brewString = dictionary["brewMethod"] as? String,
-        let brewMethod = BrewMethod.getBrewMethod(name: brewString) else {return nil}
-        
-        let photoUrlStrings = dictionary["photoUrlStrings"] as? [String]
-        
-        self.title = title
-        self.brewTimeInMinutes = brewTimeInMinutes
-        self.instructions = instructions
-        self.photoUrlStrings = photoUrlStrings ?? []
-        self.uuid = id
-        self.brewMethod = brewMethod
-    }
-    
-    
+  
     var uuid: String
     var title: String
     var brewTimeInMinutes: Int
@@ -46,6 +27,22 @@ class Recepie: FirestorePhotos{
         self.uuid = uuid
         self.photoUrlStrings = []
         self.brewMethod = brewMethod
-        self.photos = photos
     }
+  
+  required init?(dictionary: [String : Any], id: String) {
+    guard let title = dictionary["title"] as? String,
+      let brewTimeInMinutes = dictionary["brewTimeInMinutes"] as? Int,
+      let instructions = dictionary["instructions"] as? String,
+      let brewString = dictionary["brewMethod"] as? String,
+      let brewMethod = BrewMethod.getBrewMethod(name: brewString) else {return nil}
+    
+    let photoUrlStrings = dictionary["photoUrlStrings"] as? [String]
+    
+    self.title = title
+    self.brewTimeInMinutes = brewTimeInMinutes
+    self.instructions = instructions
+    self.photoUrlStrings = photoUrlStrings ?? []
+    self.uuid = id
+    self.brewMethod = brewMethod
+  }
 }
