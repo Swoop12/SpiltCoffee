@@ -131,6 +131,7 @@ class ProductController{
   //MARK: - Delete
   func delete(_ product: Product, completion: ((Bool) -> Void)?) {
     objectCache.deleteObjectFor(key: product.uuid)
+    UserController.shared.deleteForCurrentRoaster(product)
     FirestoreClient.shared.deleteFromFirestore(product, completion: completion)
   }
 }

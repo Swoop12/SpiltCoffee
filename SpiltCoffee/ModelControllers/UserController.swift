@@ -21,7 +21,6 @@ class UserController: NSObject {
     }
   }
   var listener: ListenerRegistration?
-  
   var locationManager =  CLLocationManager()
   var currentLocation: CLLocation?
   
@@ -39,7 +38,6 @@ class UserController: NSObject {
   }
   
   func fetchFullUser(id: String, completion: @escaping (Enthusiast?) -> ()){
-    
     let docRef = Firestore.firestore().collection(Enthusiast.CollectionName).document(id)
     docRef.getDocument { (docSnap, error) in
       if let error = error{
@@ -55,7 +53,6 @@ class UserController: NSObject {
       }else{
         user = Enthusiast(dictionary: dictionary, id: docSnap.documentID)
       }
-      
       guard let fectchedUser = user else {
         print("No user intialized")
         completion(nil)
@@ -183,20 +180,14 @@ class UserController: NSObject {
   
   func blockAndReport(_ user: Enthusiast, for reason: String){
     guard let currentUser = currentUser else { return }
-    
     if let currentUserIndex = currentUser.followerIds.index(of: user.uuid){
       currentUser.followerIds.remove(at: currentUserIndex)
     }
-    
     if let blockedUserIndex = user.followingIds.index(of: currentUser.uuid){
       user.followingIds.remove(at: blockedUserIndex)
     }
-    
-    
     Firestore.firestore().document("Users/\(user.uuid)").updateData(["followingIds": FieldValue.arrayRemove([currentUser.uuid])])
-    
     Firestore.firestore().document("Users/\(currentUser.uuid)").updateData(["followerIds" : FieldValue.arrayRemove([user.uuid])])
-    
     Firestore.firestore().collection("Reports/Users/\(user.uuid)").addDocument(data: [
       "Reporter" : currentUser.uuid,
       "Reason" : reason
@@ -242,6 +233,20 @@ class UserController: NSObject {
         NotificationCenter.default.post(name: UserController.userUpdatedNotification, object: self)
       }
     }
+  }
+  
+  func deleteForCurrentRoaster(_ product: Product) {
+    guard let currentUser = currentUser as? Roaster,
+      let productIndex = currentUser.productIds.index(of: product.uuid) else { return }
+    currentUser.productIds.remove(at: productIndex)
+    FirestoreClient.shared.update(object: currentUser, completion: nil)
+  }
+  
+  func deleteForCurrentRoaster(_ post: Post) {
+    guard let currentUser = currentUser as? Roaster,
+      let postIndex = currentUser.postIds.index(of: post.uuid) else { return }
+    currentUser.productIds.remove(at: postIndex)
+    FirestoreClient.shared.update(object: currentUser, completion: nil)
   }
 }
 

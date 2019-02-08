@@ -15,13 +15,11 @@ class BoringdetailsViewController: UIViewController {
     var info: String?
     var detail: String?{
         didSet{
-            print(detail)
             Firestore.firestore().document("BoringDetails/\(detail ?? "?")").getDocument { (snapshot, error) in
                 if let error = error{
                     print("\(error.localizedDescription) \(error) in function: \(#function)")
                     return
                 }else {
-                    print(snapshot?.data())
                     self.info = snapshot?.data()?["info"] as? String
                     DispatchQueue.main.async {
                         self.updateViews()
@@ -36,22 +34,4 @@ class BoringdetailsViewController: UIViewController {
         self.title = detail
         self.boringDetailsTextView.text = info
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

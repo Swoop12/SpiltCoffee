@@ -19,23 +19,4 @@ class LatoLabel: UILabel {
     let size = self.font.pointSize
     self.font = UIFont(name: fontName, size: size)!
   }
-  
-  override var intrinsicContentSize: CGSize{
-    return self.text == "" ? CGSize(width: 0, height: 0) : super.intrinsicContentSize
-  }
-  
-  override var bounds: CGRect {
-    didSet {
-      if (bounds.size.width != oldValue.size.width) {
-        self.setNeedsUpdateConstraints();
-      }
-    }
-  }
-  
-  override func updateConstraints() {
-    if(self.preferredMaxLayoutWidth != self.bounds.size.width) {
-      self.preferredMaxLayoutWidth = self.bounds.size.width
-    }
-    super.updateConstraints()
-  }
 }

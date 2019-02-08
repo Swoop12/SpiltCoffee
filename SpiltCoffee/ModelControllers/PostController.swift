@@ -65,6 +65,7 @@ class PostController {
   
   func deletePost(post: Post, completion: ((Bool) -> Void)?){
     objectCache.deleteObjectFor(key: post.uuid)
+    UserController.shared.deleteForCurrentRoaster(post)
     FirestoreClient.shared.deleteFromFirestore(post, completion: completion)
   }
 }

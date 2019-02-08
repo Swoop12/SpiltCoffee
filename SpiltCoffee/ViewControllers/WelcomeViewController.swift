@@ -155,13 +155,14 @@ extension WelcomeViewController {
   }
 }
 
+//MARK: - PhotoSelectorViewControllerDelegate
 extension WelcomeViewController: PhotoSelectorViewControllerDeleate {
-  
   func photoSelected(_ photo: UIImage) {
     self.photo = photo
   }
 }
 
+//MARK: - Keyboard Notifications
 extension WelcomeViewController {
   @objc func keyboardWillShow(notification: NSNotification) {
     if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
