@@ -127,6 +127,12 @@ class ProductController{
     currentUser.documentReference.updateData(["favoriteBeanIDs": FieldValue.arrayRemove([bean.uuid])])
     bean.documentReference.updateData(["favoriteCount": bean.favoriteCount ])
   }
+  
+  //MARK: - Delete
+  func delete(_ product: Product, completion: ((Bool) -> Void)?) {
+    objectCache.deleteObjectFor(key: product.uuid)
+    FirestoreClient.shared.deleteFromFirestore(product, completion: completion)
+  }
 }
 
 //MARK: - CachingController

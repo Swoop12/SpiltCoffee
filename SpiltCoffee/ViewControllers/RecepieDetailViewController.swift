@@ -12,12 +12,10 @@ class RecepieDetailViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var ingredientsTextView: UITextView!
-    @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var brewTimeTextField: UITextField!
     @IBOutlet weak var bookmarkButton: UIButton!
-    
-    var photoDataSource: DataViewGenericDataSource<UIImage>!
-    
+  var photoPagerViewController: PhotoPagerViewContoller?
+  
     var recepie: Recepie?{
         didSet{
             loadViewIfNeeded()
@@ -45,27 +43,17 @@ class RecepieDetailViewController: UIViewController {
         let image = isBookmarked ? #imageLiteral(resourceName: "SolidBookmark") : #imageLiteral(resourceName: "HollowBookmark")
         bookmarkButton.setImage(image, for: .normal)
     }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+  
+  //MARK: - Navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+    if segue.identifier == "toPhotoPager"{
+      photoPagerViewController = (segue.destination as! PhotoPagerViewContoller)
+      photoPagerViewController?.isEditingEnabled = false
+      guard let photoUrls = recepie?.photoUrlStrings else { return }
+      photoPagerViewController?.setPagerFor(urls: photoUrls)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    @IBAction func addPhotoButtonTapped(_ sender: Any) {
-        
-    }
+  }
     
     @IBAction func bookmarkButtonTapped(_ sender: Any) {
         guard let recipe = recepie else { return }

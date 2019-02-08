@@ -39,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.settings = settings
         
         UserController.shared.requestLocation()
-        
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient,
                                                          mode: AVAudioSessionModeMoviePlayback,
                                                          options: [.mixWithOthers])

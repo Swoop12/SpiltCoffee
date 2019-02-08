@@ -89,6 +89,12 @@
 		F75FDC0D2177AAE20048060D /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75FDC0C2177AAE20048060D /* DiscoverViewController.swift */; };
 		F7673ADE217E657D00C1BB3F /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7673ADD217E657D00C1BB3F /* Welcome.storyboard */; };
 		F7673AE0217E69CF00C1BB3F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7673ADF217E69CF00C1BB3F /* WelcomeViewController.swift */; };
+		F7695195220E0EC80007BBC6 /* LatoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7695194220E0EC80007BBC6 /* LatoLabel.swift */; };
+		F7695197220E0F200007BBC6 /* LatoBoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7695196220E0F200007BBC6 /* LatoBoldLabel.swift */; };
+		F7695199220E0F290007BBC6 /* LatoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7695198220E0F290007BBC6 /* LatoTextField.swift */; };
+		F769519B220E0F340007BBC6 /* LatoLightLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F769519A220E0F340007BBC6 /* LatoLightLabel.swift */; };
+		F769519D220E0FD70007BBC6 /* LatoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F769519C220E0FD70007BBC6 /* LatoButton.swift */; };
+		F769519F220E11860007BBC6 /* LatoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F769519E220E11860007BBC6 /* LatoTextView.swift */; };
 		F77B538E21865B2800EF04E1 /* CustomEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77B538D21865B2800EF04E1 /* CustomEnum.swift */; };
 		F77B53902186971000EF04E1 /* ShopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77B538F2186971000EF04E1 /* ShopController.swift */; };
 		F77B539221869B6D00EF04E1 /* AddShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77B539121869B6D00EF04E1 /* AddShopViewController.swift */; };
@@ -213,6 +219,12 @@
 		F75FDC0C2177AAE20048060D /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		F7673ADD217E657D00C1BB3F /* Welcome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		F7673ADF217E69CF00C1BB3F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		F7695194220E0EC80007BBC6 /* LatoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatoLabel.swift; sourceTree = "<group>"; };
+		F7695196220E0F200007BBC6 /* LatoBoldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatoBoldLabel.swift; sourceTree = "<group>"; };
+		F7695198220E0F290007BBC6 /* LatoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatoTextField.swift; sourceTree = "<group>"; };
+		F769519A220E0F340007BBC6 /* LatoLightLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatoLightLabel.swift; sourceTree = "<group>"; };
+		F769519C220E0FD70007BBC6 /* LatoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatoButton.swift; sourceTree = "<group>"; };
+		F769519E220E11860007BBC6 /* LatoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatoTextView.swift; sourceTree = "<group>"; };
 		F77B538D21865B2800EF04E1 /* CustomEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEnum.swift; sourceTree = "<group>"; };
 		F77B538F2186971000EF04E1 /* ShopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopController.swift; sourceTree = "<group>"; };
 		F77B539121869B6D00EF04E1 /* AddShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddShopViewController.swift; sourceTree = "<group>"; };
@@ -400,6 +412,12 @@
 				F72E91A92177DAF200D13300 /* ProfileImageView.swift */,
 				F72E91AC2177DDC700D13300 /* RoundedDropShadowView.swift */,
 				F757A4EA21FFBDA000A9CFAD /* ThumbNailImageView.swift */,
+				F7695194220E0EC80007BBC6 /* LatoLabel.swift */,
+				F7695196220E0F200007BBC6 /* LatoBoldLabel.swift */,
+				F769519A220E0F340007BBC6 /* LatoLightLabel.swift */,
+				F7695198220E0F290007BBC6 /* LatoTextField.swift */,
+				F769519C220E0FD70007BBC6 /* LatoButton.swift */,
+				F769519E220E11860007BBC6 /* LatoTextView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -714,6 +732,7 @@
 				F79B07F021640A93004B8748 /* DataType.swift in Sources */,
 				F75FDC012176848F0048060D /* OriginTableViewController.swift in Sources */,
 				F717738F216A68D00004693E /* PhotoSelectorViewController.swift in Sources */,
+				F7695197220E0F200007BBC6 /* LatoBoldLabel.swift in Sources */,
 				F735A6EC2167E47D006AC943 /* ProductDetailViewController.swift in Sources */,
 				F70B9B002194238300895D52 /* RecepieVideoView.swift in Sources */,
 				F75FDC0D2177AAE20048060D /* DiscoverViewController.swift in Sources */,
@@ -721,6 +740,7 @@
 				F72A0A462167A9DA006F383A /* UIViewController+Extension.swift in Sources */,
 				F72E91AA2177DAF200D13300 /* ProfileImageView.swift in Sources */,
 				F7CD697E2188DC31006C91C2 /* ShopAnnotation.swift in Sources */,
+				F7695195220E0EC80007BBC6 /* LatoLabel.swift in Sources */,
 				F757A4EB21FFBDA000A9CFAD /* ThumbNailImageView.swift in Sources */,
 				F757A4EF22000B1700A9CFAD /* Cache.swift in Sources */,
 				F7177393216A6B0D0004693E /* EditProfileTableViewController.swift in Sources */,
@@ -731,6 +751,7 @@
 				69BCEEB821090A7100F2D88E /* StyleGuide.swift in Sources */,
 				F7DE77D221825A5D00817CD9 /* LaunchCopyViewController.swift in Sources */,
 				F757A4E721FECCFD00A9CFAD /* PhotoPagerViewContoller.swift in Sources */,
+				F769519D220E0FD70007BBC6 /* LatoButton.swift in Sources */,
 				F79B07FE21642E21004B8748 /* StringExtension.swift in Sources */,
 				F717738B216A64D70004693E /* UIViewExtension.swift in Sources */,
 				9CCBC069932383367B95213B /* AppDelegate.swift in Sources */,
@@ -753,15 +774,18 @@
 				695560EC210A48E000CFFD7A /* Recepie.swift in Sources */,
 				F75E100121702D3F00534B9C /* FirestorePhotos.swift in Sources */,
 				69306A5E2112560200C81D37 /* HomeViewController.swift in Sources */,
+				F769519F220E11860007BBC6 /* LatoTextView.swift in Sources */,
 				69306A5921124A2600C81D37 /* DateHelper.swift in Sources */,
 				F7D4C57721F8F26C002C6646 /* RoastType.swift in Sources */,
 				F796D0AD21656A85008A97EF /* UserProfileHeaderView.swift in Sources */,
 				F757A4ED2200077A00A9CFAD /* CachingController.swift in Sources */,
 				694A7BB6210FD57400B7C3E7 /* PostCollectionViewCell.swift in Sources */,
+				F769519B220E0F340007BBC6 /* LatoLightLabel.swift in Sources */,
 				5205BBFF3209AC18D8487395 /* RecepieCollectionViewCell.swift in Sources */,
 				F72CC7E82174EE2A0031CF1C /* ConstantData.swift in Sources */,
 				F72CC7DE2174E6830031CF1C /* SpiltTabBarController.swift in Sources */,
 				F757A4E921FF737A00A9CFAD /* UIImageExtension.swift in Sources */,
+				F7695199220E0F290007BBC6 /* LatoTextField.swift in Sources */,
 				F748C20B218F9EDC006838B7 /* PostCollectionReusableView.swift in Sources */,
 				69BBB4A221117170009DE758 /* Origin.swift in Sources */,
 				AB3B9A298F127B7D6AFFA614 /* RoasterCollectionViewCell.swift in Sources */,

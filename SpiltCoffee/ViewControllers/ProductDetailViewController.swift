@@ -23,6 +23,7 @@ class ProductDetailViewController: UIViewController{
   @IBOutlet var pickerView: UIPickerView!
   @IBOutlet weak var productTypeCollectionView: UICollectionView!
   @IBOutlet weak var roastTypeCollectionView: UICollectionView!
+  @IBOutlet weak var delteProductButton: UIButton!
   
   //MARK: - Properties
   var photoPagerViewController: PhotoPagerViewContoller?
@@ -58,6 +59,11 @@ class ProductDetailViewController: UIViewController{
     super.viewDidAppear(animated)
     selectRoastTypeIcons()
     selectProductTypeIcons()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.navigationBar.prefersLargeTitles = true
   }
   
   //MARK: - Functions
@@ -120,7 +126,21 @@ class ProductDetailViewController: UIViewController{
     purchaseButton.isHidden = true
     heartButton.isHidden = true
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveProduct))
-    self.title = product != nil ? "Edit Product" : "Add Product"
+    setViewForCreateOrEdit()
+    productTypeCollectionView.isUserInteractionEnabled = true
+    roastTypeCollectionView.isUserInteractionEnabled = true
+    photoPagerViewController?.isEditingEnabled = true
+    navigationController?.navigationBar.prefersLargeTitles = true
+  }
+  
+  fileprivate func setViewForCreateOrEdit() {
+    if product != nil {
+      self.title = "Edit Product"
+      delteProductButton.isHidden = false
+    }else {
+      self.title = "Add Product"
+      delteProductButton.isHidden = true
+    }
   }
   
   fileprivate func setViewForReading() {
@@ -129,15 +149,18 @@ class ProductDetailViewController: UIViewController{
     purchaseButton.isHidden = false
     priceStackView.isHidden = true
     self.navigationItem.rightBarButtonItem = nil
+    productTypeCollectionView.isUserInteractionEnabled = false
+    roastTypeCollectionView.isUserInteractionEnabled = false
+    navigationController?.navigationBar.prefersLargeTitles = false
+    photoPagerViewController?.isEditingEnabled = false
+    delteProductButton.isHidden = true
   }
   
   func lockPermissionGuards(){
     if UserController.shared.currentUser?.uuid == product?.roasterAbridgedDictionary["uuid"] as? String || product == nil{
       setViewForEditing()
-      photoPagerViewController?.isEditingEnabled = true
     }else{
       setViewForReading()
-      photoPagerViewController?.isEditingEnabled = false
     }
   }
   
@@ -213,9 +236,21 @@ class ProductDetailViewController: UIViewController{
     self.presentSimpleAlertWith(title: "Visit \(self.product?.roasterAbridgedDictionary["name"] ?? "the Roaster")'s Website to Purchase", body: "In app purchases coming soon (:")
   }
   
-  @IBAction func addPhotoButtonTapped(_ sender: Any) {
-    self.presentImagePickerWith(alertTitle: "Add an image", message: nil)
+  @IBAction func deleteProductButtonTapped(_ sender: Any) {
+    self.presentAreYouSureAlert(title: "Delete Product?", body: "Are you sure you want to delete this product? This data cannot be recovered.") { (_) in
+      guard let product = self.product else { return }
+      UIApplication.shared.isNetworkActivityIndicatorVisible = true
+      ProductController.shared.delete(product, completion: { (success) in
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        if success {
+          self.navigationController?.popViewController(animated: true)
+        }else {
+          self.presentSimpleAlertWith(title: "Whoops!", body: "We weren't able to delete this product.  Please make sure you are connected to the internet.")
+        }
+      })
+    }
   }
+  
 }
 
 //MARK: - UIPickerView DataSource & Delegate
@@ -334,7 +369,7 @@ extension ProductDetailViewController: UICollectionViewDelegateFlowLayout{
   
   func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
     let cell = collectionView.cellForItem(at: indexPath) as! IconCollectionViewCell
-    cell.iconImageView.setImageColor(color: .black)
+    cell.iconImageView.setImageColor(color: UIColor.lightGray)
     if collectionView == productTypeCollectionView{
       self.productType = nil
     }else{
@@ -347,8 +382,7 @@ extension ProductDetailViewController: UICollectionViewDelegateFlowLayout{
       let width = (collectionView.frame.width - 17)/5
       return CGSize(width: width, height: width)
     }else {
-      let height = (collectionView.frame.width - 12) / 3
-      return CGSize(width: height, height: height)
+      return CGSize(width: 75, height: 75)
     }
   }
   
@@ -357,6 +391,11 @@ extension ProductDetailViewController: UICollectionViewDelegateFlowLayout{
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 2
+    if collectionView == productTypeCollectionView{
+      return 2
+    }else {
+      return (self.view.frame.width - (75 * 3) - 4) / 3
+    }
+    
   }
 }
