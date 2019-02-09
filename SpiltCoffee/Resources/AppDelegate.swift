@@ -21,7 +21,6 @@ import AVFoundation
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
     // MARK: - Properties
     

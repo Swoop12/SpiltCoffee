@@ -152,6 +152,7 @@ class ProductDetailViewController: UIViewController{
     productTypeCollectionView.isUserInteractionEnabled = false
     roastTypeCollectionView.isUserInteractionEnabled = false
     navigationController?.navigationBar.prefersLargeTitles = false
+    self.title = ""
     photoPagerViewController?.isEditingEnabled = false
     delteProductButton.isHidden = true
   }

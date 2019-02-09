@@ -15,6 +15,11 @@ class AddProductTableViewController: UITableViewController {
   @IBOutlet weak var editButtonTapped: UIBarButtonItem!
   
   //MARK: - Properties
+  var beans: [CoffeeBean] = []
+  var otherProducts: [Product] = []
+  var products: [Product] {
+    return beans + otherProducts
+  }
   var productsTableViewDataSource: DataViewGenericDataSource<Product>!
   var roaster: Roaster?{
     didSet{
@@ -37,13 +42,23 @@ class AddProductTableViewController: UITableViewController {
   
   //MARK: - Functions
   func fetchProducts(for roaster: Roaster){
-    FirestoreClient.shared.fetchAllObjectsWhere("roaster.uuid", FirestoreQuery.equals, roaster.uuid, orderedBy: nil, limitedTo: nil) { (products: [Product]?) in
-      guard let products = products else {print("No products returned") ; return}
-      DispatchQueue.main.async {
-        self.productsTableViewDataSource = DataViewGenericDataSource(dataView: self.tableView, dataType: .product, data: products)
-        self.tableView.delegate = self
-        self.tableView.reloadData()
-      }
+    let dispatchGroup = DispatchGroup()
+    dispatchGroup.enter()
+    FirestoreClient.shared.fetchAllObjectsWhere("roaster.uuid", .equals, roaster.uuid, orderedBy: nil, limitedTo: nil) { (products: [Product]?) in
+      guard var products = products else { dispatchGroup.leave() ; return }
+        self.otherProducts = products.filter{ $0.productType != .coffeeBean }
+        dispatchGroup.leave()
+    }
+    dispatchGroup.enter()
+    FirestoreClient.shared.fetchAllObjectsWhere("roaster.uuid", .equals, roaster.uuid, orderedBy: nil, limitedTo: nil) { (beans: [CoffeeBean]?) in
+      guard let beans = beans else { dispatchGroup.leave() ; return }
+      self.beans = beans
+      dispatchGroup.leave()
+    }
+    dispatchGroup.notify(queue: .main) {
+      self.productsTableViewDataSource = DataViewGenericDataSource(dataView: self.tableView, dataType: .product, data: self.products)
+      self.tableView.delegate = self
+      self.tableView.reloadData()
     }
   }
   

@@ -35,6 +35,7 @@ class RecepieDetailViewController: UIViewController {
         ingredientsTextView.text = recepie?.instructions
         updateBookmarkButton()
         brewTimeTextField.text = "\(recepie?.brewTimeInMinutes ?? 0) minutes"
+      
 //      let photos = recipe.photosData.isEmpty ? [recipe.brewMethod.image] : recipe.photos
 //        photoDataSource = DataViewGenericDataSource(dataView: photosCollectionView, dataType: .photo, data: photos)
     }
@@ -48,10 +49,10 @@ class RecepieDetailViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
     if segue.identifier == "toPhotoPager"{
+      guard let recepie = recepie else { return }
       photoPagerViewController = (segue.destination as! PhotoPagerViewContoller)
       photoPagerViewController?.isEditingEnabled = false
-      guard let photoUrls = recepie?.photoUrlStrings else { return }
-      photoPagerViewController?.setPagerFor(urls: photoUrls)
+      photoPagerViewController?.setPager(for: [recepie.brewMethod.image])
     }
   }
     

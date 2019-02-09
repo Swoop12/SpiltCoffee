@@ -39,8 +39,7 @@ class HomeViewController: UIViewController {
       DispatchQueue.main.async {
         guard let beans = beans else { return }
         self.favoritesCollectionViewDataSource = DataViewGenericDataSource(dataView: self.favoritesCollectionView, dataType: DataType.coffeeBean, data: beans)
-        self.favoritesCollectionViewDataSource?.delegate = self
-        
+        self.favoritesCollectionViewDataSource?.delegate = self 
       }
     }
   }

@@ -92,6 +92,7 @@ class EditProfileTableViewController: UITableViewController{
     if segue.identifier == "toPhotoSelector"{
       let photoSelector = segue.destination as? PhotoSelectorViewController
       photoSelector?.delegate = self
+      photoSelector?.isEditingEnabled = true
       photoSelector?.photo = currentUser?.profilePicture
     } else if segue.identifier == "toBoringDetails"{
       let detailVC = segue.destination as? BoringdetailsViewController
