@@ -72,7 +72,7 @@ class PostDetailViewController: UIViewController {
   }
   
   func setPhotoSelectorImageView(){
-    let photoSelector = self.childViewControllers[0] as? PhotoSelectorViewController
+    let photoSelector = self.children[0] as? PhotoSelectorViewController
     photoSelector?.imageUrlString = post?.thumbnailUrl
   }
   

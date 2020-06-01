@@ -10,6 +10,6 @@ import UIKit
 
 extension UIImage{
   var data: Data?{
-    return UIImageJPEGRepresentation(self, 0.25)
+    return self.jpegData(compressionQuality: 0.25)
   }
 }

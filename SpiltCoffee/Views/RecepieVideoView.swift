@@ -65,18 +65,18 @@ class RecepieVideoView: UIView {
         
     }
     
-    func wasTapped(){
+    @objc func wasTapped(){
         player?.timeControlStatus.rawValue == 0 ? player?.play() : player?.pause()
     }
     
-    func wasDoubleTapped(){
+    @objc func wasDoubleTapped(){
         guard let player = player else { return }
         viewController?.presentAVPlayerVC(with: player)
     }
     
     @objc func playerItemDidReachEnd(notification: Notification) {
         if let playerItem: AVPlayerItem = notification.object as? AVPlayerItem {
-            playerItem.seek(to: kCMTimeZero) { (_) in
+            playerItem.seek(to: CMTime.zero) { (_) in
                 self.player?.play()
             }
         }

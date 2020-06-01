@@ -38,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.settings = settings
         
         UserController.shared.requestLocation()
-        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient,
-                                                         mode: AVAudioSessionModeMoviePlayback,
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient,
+                                                         mode: AVAudioSession.Mode.moviePlayback,
                                                          options: [.mixWithOthers])
 //        try? Auth.auth().signOut()
         //        let patrick = Roaster(name: "Patrick Adcock", email: "patrick.adcock@mac.com", profilePicture: nil, uuid: "DAqKfkbv8kfhGeE1K6kWp9sOQVH3")

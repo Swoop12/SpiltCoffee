@@ -39,7 +39,7 @@ class Enthusiast: FirestoreFetchable{
         }
         set {
             guard let image =  newValue,
-                let data = UIImageJPEGRepresentation(image, 0.5) else {return}
+                let data = image.jpegData(compressionQuality: 0.5) else {return}
             profilePictureData = data
         }
     }
@@ -57,7 +57,7 @@ class Enthusiast: FirestoreFetchable{
         self.email = email
         self.uuid = uuid
         if let profilePicture = profilePicture{
-            profilePictureData = UIImageJPEGRepresentation(profilePicture, 0.3)
+            profilePictureData = profilePicture.jpegData(compressionQuality: 0.3)
         }
     }
     

@@ -40,12 +40,12 @@ class SpiltTabBarController: UITabBarController {
     let navs: [UINavigationController] = [home, discover, shop, brew, profile]
     navs.forEach{
       $0.navigationBar.titleTextAttributes = [
-        NSFontAttributeName: UIFont(name: "Lato-Regular", size: 20)!,
-        NSForegroundColorAttributeName : UIColor.mossGreen
+        NSAttributedString.Key.font: UIFont(name: "Lato-Regular", size: 20)!,
+        NSAttributedString.Key.foregroundColor : UIColor.mossGreen
       ]
       $0.navigationBar.largeTitleTextAttributes = [
-        NSFontAttributeName: UIFont(name: "Lato-Regular", size: 30)!,
-        NSForegroundColorAttributeName : UIColor.mossGreen
+        NSAttributedString.Key.font: UIFont(name: "Lato-Regular", size: 30)!,
+        NSAttributedString.Key.foregroundColor : UIColor.mossGreen
       ]
       //      $0.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "previousButton").withRenderingMode(.alwaysTemplate)
       //      $0.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "spiltBackButton").withRenderingMode(.alwaysTemplate)

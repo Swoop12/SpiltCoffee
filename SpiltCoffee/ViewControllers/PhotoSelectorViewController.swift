@@ -51,7 +51,7 @@ class PhotoSelectorViewController: UIViewController {
   
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    guard let photo = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
+    guard let photo = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage else {return}
     picker.dismiss(animated: true) {
       self.photo = photo
       self.editPhotoButton.setTitle("", for: .normal)

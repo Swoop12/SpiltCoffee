@@ -50,7 +50,7 @@ class LaunchCopyViewController: UIViewController {
     
     func presentMainInterface(){
         let spiltTabBarController = SpiltTabBarController()
-        self.present(spiltTabBarController, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController = spiltTabBarController
     }
 
     /*

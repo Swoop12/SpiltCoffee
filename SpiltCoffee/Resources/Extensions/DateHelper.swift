@@ -42,8 +42,6 @@ extension String {
         
         //dateFormatter.dateFormat = "EEE, MMM d, yyyy - h:mm a"
         dateFormatter.dateFormat = "h:mm a"
-        //dateFormatter.dateStyle = .medium
-        dateFormatter.date
         dateFormatter.timeZone = TimeZone.current
         return dateFormatter.string(from: date)
     }
@@ -63,8 +61,6 @@ extension String {
         
         //dateFormatter.dateFormat = "EEE, MMM d, yyyy - h:mm a"
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-        //dateFormatter.dateStyle = .medium
-        dateFormatter.date
         dateFormatter.timeZone = TimeZone.current
         return dateFormatter.string(from: date)
     }

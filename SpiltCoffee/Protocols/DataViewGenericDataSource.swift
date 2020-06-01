@@ -79,7 +79,7 @@ class DataViewGenericDataSource<T>: NSObject, UICollectionViewDataSource, UIColl
   
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     
-    let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "postHeader", for: indexPath) as? PostCollectionReusableView
+    let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "postHeader", for: indexPath) as? PostCollectionReusableView
     headerView?.frame.size.height = 100
     headerView?.bio = roasterBio
     headerView?.addPostButton.isHidden = self.buttonIsHidden ?? true

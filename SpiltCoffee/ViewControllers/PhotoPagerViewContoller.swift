@@ -99,7 +99,7 @@ class PhotoPagerViewContoller: UIViewController {
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     picker.dismiss(animated: true, completion: nil)
-    guard let photo = info[UIImagePickerControllerOriginalImage] as? UIImage else {return}
+    guard let photo = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage else {return}
     add(photo)
   }
   

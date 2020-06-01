@@ -62,7 +62,7 @@ class EditProfileTableViewController: UITableViewController{
     }
   }
   
-  func updateUser(){
+    @objc func updateUser(){
     guard let name = nameTextField.text,
       let location = locationTextField.text,
       let company = companyTextField.text,

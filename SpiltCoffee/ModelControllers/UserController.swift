@@ -27,7 +27,7 @@ class UserController: NSObject {
   func createNewUser(name: String, email: String, profilePicture: UIImage?, uuid: String, completion: @escaping (Bool) -> () ) -> Enthusiast{
     var data: Data?
     if let profilePicture = profilePicture{
-      data = UIImageJPEGRepresentation(profilePicture, 0.3)
+        data = profilePicture.jpegData(compressionQuality: 0.3)
     }
     let newUser = Enthusiast(name: name, email: email, profilePictureData: data, uuid: uuid)
     FirestoreClient.shared.saveToFirestore(newUser, completion: completion)
